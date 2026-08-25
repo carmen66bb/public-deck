@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>膳食赛道 · 达人种草反哺品牌自营生意 业务模式</title>
+<style>
+  :root{
+    --bg:#f7f8fa;
+    --ink:#1f2329;
+    --ink2:#51565d;
+    --ink3:#8a9099;
+    --line:#e8eaed;
+    --teal:#0f9e8e;
+    --teal-deep:#0b7d70;
+    --teal-soft:#e6f6f3;
+    --teal-line:#bfe7e0;
+    --green:#22a06b;
+    --green-soft:#e7f6ee;
+    --orange:#e8722a;
+    --orange-soft:#fdefe4;
+    --orange-line:#f6c79f;
+    --blue:#3a6ff0;
+    --blue-soft:#eaf0fe;
+    --blue-line:#c2d4fb;
+    --red:#d64545;
+    --red-soft:#fdecec;
+    --red-line:#f3c2c2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);padding:32px 20px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1100px;margin:0 auto;}
+
+  .flag{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal-soft);color:var(--teal-deep);border:1px solid var(--teal-line);
+    font-size:13px;font-weight:700;padding:7px 14px;border-radius:8px;margin-bottom:16px;
+  }
+  .flag .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 14px rgba(15,30,50,.04);}
+  .card-head{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,var(--teal),var(--teal-deep));padding:18px 24px;}
+  .card-head .title{display:flex;align-items:baseline;gap:10px;color:#fff;}
+  .card-head .no{font-size:15px;font-weight:800;opacity:.85;}
+  .card-head h2{font-size:22px;font-weight:800;letter-spacing:.5px;}
+  .card-head .tag{background:rgba(255,255,255,.22);color:#fff;font-size:12px;font-weight:700;letter-spacing:2px;padding:5px 12px;border-radius:6px;}
+  .card-body{padding:22px 24px 26px;}
+
+  /* 战略立意 + 可复制路径（合并大框） */
+  .vision-hero{
+    border-radius:14px;overflow:hidden;margin-bottom:24px;
+    border:1px solid var(--teal-line);box-shadow:0 6px 20px rgba(11,125,112,.16);
+  }
+  .vh-top{
+    background:linear-gradient(135deg,#0b7d70,#0f9e8e);
+    padding:20px 24px;position:relative;overflow:hidden;
+  }
+  .vh-top::before{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border-radius:50%;background:rgba(255,255,255,.08);}
+  .vh-top p{font-size:15.5px;font-weight:700;color:#fff;line-height:1.75;position:relative;z-index:1;}
+  .vh-top p .hl{color:#ffe6b8;}
+  .vh-bottom{
+    background:linear-gradient(135deg,#f0faf8,#e6f6f3);
+    padding:20px 24px 18px;text-align:center;position:relative;border-top:2px solid var(--teal);
+  }
+  .vh-bottom .vh-tag{
+    position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+    background:var(--teal);color:#fff;font-size:11.5px;font-weight:800;letter-spacing:1px;
+    padding:3px 14px;border-radius:11px;box-shadow:0 2px 8px rgba(15,158,142,.28);white-space:nowrap;
+  }
+  .vh-bottom p{font-size:15px;font-weight:700;color:var(--teal-deep);}
+  .vh-bottom .em{color:var(--orange);}
+
+  /* 步骤区 */
+  .step{margin-bottom:24px;}
+  .step-h{display:flex;align-items:center;gap:9px;margin-bottom:12px;}
+  .step-h .n{
+    min-width:24px;height:24px;padding:0 5px;border-radius:7px;background:var(--teal);color:#fff;
+    display:inline-flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;
+  }
+  .step-h .t{font-size:16px;font-weight:800;color:var(--ink);}
+  .step-h .sub{font-size:12.5px;color:var(--ink3);font-weight:600;margin-left:2px;}
+
+  /* 痛点三卡 */
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
+  .pain{background:var(--red-soft);border:1px solid var(--red-line);border-radius:11px;padding:13px 15px;border-top:3px solid var(--red);}
+  .pain .pk{font-size:14px;font-weight:800;color:var(--red);margin-bottom:6px;}
+  .pain .pv{font-size:12.5px;color:var(--ink2);line-height:1.55;}
+  .pain .pf{font-size:11.5px;color:var(--ink3);font-weight:700;margin-top:7px;border-top:1px dashed var(--red-line);padding-top:6px;}
+  .pain-root{margin-top:11px;font-size:13px;color:var(--ink2);background:#fff;border:1px dashed var(--red-line);border-radius:9px;padding:11px 15px;font-weight:600;}
+  .pain-root b{color:var(--red);}
+
+  /* 逻辑三段链 */
+  .chain{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;}
+  .chain .node{
+    flex:1;min-width:170px;background:var(--teal-soft);border:1px solid var(--teal-line);
+    border-radius:10px;padding:13px 15px;
+  }
+  .chain .node .nk{font-size:13.5px;font-weight:800;color:var(--teal-deep);margin-bottom:5px;}
+  .chain .node .nd{font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  .chain .node .nd b{color:var(--teal-deep);}
+  .chain .arrow{display:flex;align-items:center;padding:0 8px;color:var(--teal);font-size:20px;font-weight:800;}
+  .logic-foot{font-size:13px;color:var(--ink2);margin-top:10px;padding-left:2px;}
+  .logic-foot b{color:var(--teal-deep);}
+
+  /* 对比表：传统 vs 本模式 */
+  .cmp{width:100%;border-collapse:collapse;border-radius:11px;overflow:hidden;border:1px solid var(--line);}
+  .cmp th,.cmp td{padding:10px 14px;font-size:12.8px;text-align:left;border-bottom:1px solid var(--line);}
+  .cmp thead th{background:#f2f4f7;color:var(--ink);font-weight:800;font-size:12.5px;}
+  .cmp thead th.old{color:var(--ink3);}
+  .cmp thead th.new{color:var(--teal-deep);background:var(--teal-soft);}
+  .cmp td.dim{color:var(--ink2);font-weight:700;background:#fbfbfc;}
+  .cmp td.old{color:var(--ink3);}
+  .cmp td.new{color:var(--ink);font-weight:600;background:#f4fbf9;}
+  .cmp td.new b{color:var(--teal-deep);}
+  .cmp tr:last-child td{border-bottom:none;}
+
+  /* 如翼反向用法 */
+  .reverse{background:var(--teal-soft);border:1px solid var(--teal-line);border-radius:12px;padding:16px 18px;}
+  .reverse .rlead{font-size:13px;color:var(--ink2);margin-bottom:12px;font-weight:600;}
+  .reverse .rlead b{color:var(--teal-deep);}
+  .rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+  .rev{background:#fff;border:1px solid var(--teal-line);border-radius:9px;padding:11px 13px;}
+  .rev .rd{font-size:12.5px;color:var(--ink2);line-height:1.5;}
+  .rev .rd .from{color:var(--red);font-weight:700;}
+  .rev .rd .to{color:var(--teal-deep);font-weight:800;}
+  .reverse .rfoot{margin-top:12px;font-size:13px;color:var(--ink2);font-weight:600;background:#fff;border:1px dashed var(--teal-line);border-radius:9px;padding:11px 15px;}
+  .reverse .rfoot b{color:var(--orange);}
+
+  /* 三笔收入 */
+  .income-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
+  .income{background:var(--green-soft);border:1px solid #cfead9;border-radius:11px;padding:14px 15px;border-top:3px solid var(--green);}
+  .income .ik{font-size:13px;font-weight:800;color:var(--green);margin-bottom:5px;}
+  .income .iv{font-size:12.5px;color:var(--ink2);line-height:1.5;margin-bottom:8px;}
+  .income .im{font-size:19px;font-weight:800;color:var(--green);}
+  .income .im small{font-size:11.5px;color:var(--ink3);font-weight:700;}
+  .income-foot{margin-top:11px;font-size:13px;color:var(--ink2);font-weight:600;background:#eef9f3;border:1px solid #cfead9;border-radius:9px;padding:11px 15px;}
+  .income-foot b{color:var(--green);}
+
+  /* 标杆故事 */
+  .badge{font-size:11px;font-weight:800;color:#fff;padding:3px 9px;border-radius:5px;letter-spacing:.5px;}
+  .badge.h1{background:var(--green);}
+  .story{background:var(--green-soft);border:1px solid #cfead9;border-radius:12px;padding:16px 18px;}
+  .story .sl{font-size:13.5px;font-weight:800;color:var(--green);margin-bottom:10px;}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+  .g-item{background:#fff;border:1px solid #d8ecdf;border-radius:9px;padding:11px 13px;}
+  .g-item .k{font-size:11.5px;color:var(--ink3);font-weight:700;margin-bottom:4px;}
+  .g-item .v{font-size:13px;color:var(--ink);line-height:1.5;}
+  .g-item .v b{color:var(--green);}
+  .g-item.wide{grid-column:1 / -1;background:#eef9f3;}
+  .story .oneliner{margin-top:11px;font-size:13px;color:var(--ink2);font-weight:600;}
+  .story .oneliner b{color:var(--green);}
+
+  /* 万益蓝 Q2 战果双指标 */
+  .q2win{grid-column:1 / -1;background:linear-gradient(135deg,#0b7d70,#0f9e8e);border:none;border-radius:9px;padding:13px 15px;}
+  .q2win .q2h{font-size:11.5px;font-weight:800;color:#ffe6b8;margin-bottom:9px;letter-spacing:.3px;}
+  .q2win .q2row{display:flex;gap:11px;}
+  .q2win .q2m{flex:1;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:8px;padding:10px 13px;}
+  .q2win .q2m .q2n{font-size:19px;font-weight:800;color:#fff;line-height:1.2;}
+  .q2win .q2m .q2d{font-size:11.3px;color:#eafaf7;font-weight:600;margin-top:4px;line-height:1.45;}
+  .q2win .q2m .q2d b{color:#ffe6b8;}
+  @media(max-width:560px){.q2win .q2row{flex-direction:column;}}
+
+  /* H2 覆盖计划：分层 */
+  .prog-lead{font-size:13.5px;color:var(--ink);font-weight:600;margin-bottom:12px;background:var(--orange-soft);border:1px solid var(--orange-line);border-radius:9px;padding:11px 15px;}
+  .prog-lead b{color:var(--orange);}
+
+  /* 领跑 · 华大超级卡 */
+  .hero-case{background:linear-gradient(135deg,#f0faf8,#eafaf7);border:1.5px solid var(--teal);border-radius:14px;padding:0;overflow:hidden;margin-bottom:14px;box-shadow:0 4px 16px rgba(15,158,142,.10);}
+  .hero-case .hc-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--teal),var(--teal-deep));padding:12px 18px;}
+  .hero-case .hc-head .crown{font-size:16px;}
+  .hero-case .hc-head .hc-name{font-size:16px;font-weight:800;color:#fff;}
+  .hero-case .hc-head .hc-tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#fff;background:rgba(255,255,255,.22);padding:3px 10px;border-radius:5px;}
+  .hero-case .hc-head .hc-stat{margin-left:auto;font-size:11.5px;font-weight:800;color:#fff;background:var(--orange);padding:3px 11px;border-radius:10px;}
+  .hero-case .hc-body{padding:16px 18px;}
+  .hc-flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin-bottom:13px;}
+  .hc-flow .fnode{flex:1;min-width:150px;background:#fff;border:1px solid var(--teal-line);border-radius:9px;padding:11px 13px;}
+  .hc-flow .fnode .fk{font-size:12px;font-weight:800;color:var(--teal-deep);margin-bottom:5px;}
+  .hc-flow .fnode .fv{font-size:11.8px;color:var(--ink2);line-height:1.5;}
+  .hc-flow .fnode .fv b{color:var(--ink);}
+  .hc-flow .fnode .fv .rd{color:var(--red);font-weight:700;}
+  .hc-flow .farr{display:flex;align-items:center;padding:0 7px;color:var(--teal);font-size:17px;font-weight:800;}
+  .hc-signal{background:#fff;border:1px dashed var(--teal-line);border-radius:9px;padding:11px 14px;}
+  .hc-signal .sig-h{font-size:12px;font-weight:800;color:var(--ink);margin-bottom:8px;}
+  .hc-signal .sig-h .warn{color:var(--orange);font-weight:700;font-size:11px;margin-left:4px;}
+  .hc-signal .sig-grid{display:flex;flex-wrap:wrap;gap:8px;}
+  .hc-signal .sig{flex:1;min-width:120px;background:var(--teal-soft);border-radius:7px;padding:8px 11px;text-align:center;}
+  .hc-signal .sig .sn{font-size:15px;font-weight:800;color:var(--teal-deep);}
+  .hc-signal .sig .sn small{font-size:11px;color:var(--green);font-weight:800;}
+  .hc-signal .sig .sd{font-size:10.5px;color:var(--ink3);font-weight:700;margin-top:2px;}
+  .hc-signal .sig-foot{font-size:11.5px;color:var(--ink2);margin-top:9px;line-height:1.5;font-weight:600;}
+  .hc-signal .sig-foot b{color:var(--orange);}
+
+  /* 梯队跟进 · 4 家横排 */
+  .strong-lead{font-size:12.5px;color:var(--ink3);font-weight:800;letter-spacing:1px;margin:2px 0 10px 2px;}
+  .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:11px;margin-bottom:14px;}
+  .prog{background:#fff;border:1px solid var(--line);border-radius:11px;padding:13px 15px;border-top:3px solid var(--teal);}
+  .prog .ph{display:flex;align-items:center;gap:7px;font-size:14px;font-weight:800;color:var(--ink);margin-bottom:7px;}
+  .prog .ph .pb{background:var(--teal);color:#fff;font-size:11px;font-weight:800;width:20px;height:20px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;}
+  .prog .pstat{margin-left:auto;font-size:11px;font-weight:800;padding:2px 9px;border-radius:10px;}
+  .prog .pstat.run{background:var(--green-soft);color:var(--green);}
+  .prog .pstat.watch{background:var(--orange-soft);color:var(--orange);}
+  .prog .pd{font-size:12.5px;color:var(--ink2);line-height:1.55;}
+  .prog .pd b{color:var(--teal-deep);}
+  .prog.tail{grid-column:1 / -1;border-top-color:var(--ink3);background:#fbfbfc;}
+
+  /* 诺特兰德 · KOC 小额竞价探索加宽卡 */
+  .prog.explore{grid-column:1 / -1;border-top-color:var(--orange);background:var(--orange-soft);}
+  .prog.explore .ph .pb{background:var(--orange);}
+  .prog.explore .pstat.explore{background:#fff;color:var(--orange);border:1px solid var(--orange-line);}
+  .exp-sub{font-size:11.8px;color:var(--ink2);font-weight:600;margin-bottom:9px;line-height:1.5;}
+  .exp-sub b{color:var(--orange);}
+  .exp-row{display:flex;flex-wrap:wrap;gap:8px;}
+  .exp-m{flex:1;min-width:150px;background:#fff;border:1px solid var(--orange-line);border-radius:8px;padding:9px 12px;}
+  .exp-m .em-t{font-size:11px;color:var(--ink3);font-weight:800;margin-bottom:4px;}
+  .exp-m .em-v{font-size:11.6px;color:var(--ink2);line-height:1.5;}
+  .exp-m .em-v b{color:var(--ink);}
+  .exp-m .em-v .up{color:var(--orange);font-weight:800;}
+  .exp-foot{margin-top:9px;font-size:11.6px;color:var(--ink2);font-weight:600;line-height:1.5;}
+  .exp-foot b{color:var(--orange);}
+
+  /* 依据如翼数据 · 对客方案链接标签 */
+  .doclink{
+    display:inline-flex;align-items:center;gap:5px;margin-top:9px;
+    background:#fff;border:1px solid var(--teal-line);border-radius:8px;
+    padding:6px 11px;font-size:11.5px;font-weight:700;color:var(--teal-deep);
+    text-decoration:none;transition:all .15s;
+  }
+  .doclink:hover{background:var(--teal-soft);border-color:var(--teal);}
+  .doclink .di{font-size:12px;}
+  .doclink .dn{color:var(--ink3);font-weight:600;}
+  .doclink .darr{margin-left:auto;color:var(--teal);font-weight:800;}
+  /* 华大超级卡里的链接（白字调性） */
+  .hero-case .doclink{border-color:var(--teal);background:var(--teal-soft);}
+
+  /* 收口：需要内部协助 */
+  .goalcard{background:linear-gradient(135deg,#eef3ff,#eaf0fe);border:1.5px solid var(--blue-line);border-radius:12px;padding:18px 20px;}
+  .goalcard .gtitle{font-size:15px;font-weight:800;color:var(--blue);margin-bottom:4px;}
+  .goalcard .gsub{font-size:12.5px;color:var(--ink2);margin-bottom:14px;}
+  .roles{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .role{background:#fff;border:1px solid var(--blue-line);border-radius:10px;padding:13px 14px;border-top:3px solid var(--blue);}
+  .role .rh{font-size:13px;font-weight:800;color:var(--blue);margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;}
+  .role .rh .cnt{font-size:11px;color:var(--ink3);font-weight:700;background:var(--blue-soft);padding:2px 8px;border-radius:10px;}
+  .role ul{list-style:none;}
+  .role li{font-size:12px;color:var(--ink2);padding:4px 0 4px 14px;position:relative;line-height:1.45;}
+  .role li::before{content:"";position:absolute;left:2px;top:10px;width:4px;height:4px;border-radius:50%;background:var(--blue);}
+  .role li b{color:var(--ink);}
+  .role.p0{border-top-color:var(--red);}
+  .role.p0 .rh,.role.p0 .rh .cnt{color:var(--red);} .role.p0 .rh .cnt{background:var(--red-soft);} .role.p0 li::before{background:var(--red);}
+  .goalcard .metric{margin-top:14px;background:#fff;border:1px dashed var(--blue-line);border-radius:9px;padding:11px 15px;display:flex;justify-content:space-around;text-align:center;flex-wrap:wrap;gap:10px;}
+  .goalcard .metric .m .mn{font-size:16px;font-weight:800;color:var(--blue);}
+  .goalcard .metric .m .md{font-size:11.5px;color:var(--ink2);}
+
+  /* 需求推进状态徽章 */
+  .st{display:inline-block;font-size:10px;font-weight:800;padding:1px 7px;border-radius:9px;margin-left:6px;vertical-align:middle;white-space:nowrap;}
+  .st.talking{background:#e3f4ee;color:#0b7d70;border:1px solid #b4e2d3;}
+  .st.todo{background:#fff2e0;color:#c46a0a;border:1px solid #f4d5a8;}
+
+  @media(max-width:680px){
+    .grid,.roles,.prog-grid,.pain-grid,.rev-grid,.income-grid{grid-template-columns:1fr;}
+    .chain{flex-direction:column;}
+    .chain .arrow{transform:rotate(90deg);padding:4px 0;}
+    .cmp{font-size:11.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="flag"><span class="dot"></span>月会分享 · 膳食赛道业务模式</div>
+
+  <div class="card">
+    <div class="card-head">
+      <div class="title"><span class="no">MODEL</span><h2>达人种草 反哺 品牌自营生意</h2></div>
+      <span class="tag">种收一体</span>
+    </div>
+
+    <div class="card-body">
+
+      <!-- 战略立意 + 可复制路径（合并大框） -->
+      <div class="vision-hero">
+        <div class="vh-top">
+          <p>如翼让膳食商家的<span class="hl">生态生意第一次可视化</span>——看得见，才谈得上把生意搬进腾讯来做。<br>以工具持续激发商家<span class="hl">在行业内的真实生意争夺</span>，从争夺中反推产品升级方向并落地，最终<span class="hl">回收行业收入、同步做大商家生意</span>。</p>
+        </div>
+        <div class="vh-bottom">
+          <div class="vh-tag">一条可复制的路径</div>
+          <p>用<span class="em">如翼人群资产诊断</span>找到品牌盘缺口，用<span class="em">达人内容前置种草蓄水</span>，再把达人请进<span class="em">品牌自营直播间集中收割</span>，素材沉淀为可长期复投的竞价资产——让<span class="em">种草与收割第一次真正闭环</span>。</p>
+        </div>
+      </div>
+
+      <!-- 1 痛点 -->
+      <div class="step">
+        <div class="step-h"><span class="n">1</span><span class="t">为什么值得做</span><span class="sub">膳食是「高信任门槛」品类，客户普遍困在三件事里</span></div>
+        <div class="pain-grid">
+          <div class="pain">
+            <div class="pk">只割不种</div>
+            <div class="pv">靠竞价直接收割老客，缺前置种草蓄水，人群池越割越薄、后劲不足</div>
+            <div class="pf">影响面：几乎所有膳食客户</div>
+          </div>
+          <div class="pain">
+            <div class="pk">种收两张皮</div>
+            <div class="pv">投了达人做内容，流量却没接回自营生意，品牌费打了水漂</div>
+            <div class="pf">影响面：有达人预算的客户</div>
+          </div>
+          <div class="pain">
+            <div class="pk">大场起不来</div>
+            <div class="pv">临时达播冷启动慢、无广告预算承接，大促爆发力弱</div>
+            <div class="pf">影响面：所有做大场的客户</div>
+          </div>
+        </div>
+        <div class="pain-root">共同根因：<b>种草和收割是两张皮</b>——种草的钱花了，人群没留住；收割的时候才发现，池子里没水了。</div>
+      </div>
+
+      <!-- 2 三步走 -->
+      <div class="step">
+        <div class="step-h"><span class="n">2</span><span class="t">模式怎么跑</span><span class="sub">三步走：种草立信任 → 蓄水挂预约 → 进直播间收割</span></div>
+        <div class="chain">
+          <div class="node"><div class="nk">第1步 · 种草立信任</div><div class="nd">用与目标人群<b>高度重合的达人</b>拍内容，先把品牌信任立起来</div></div>
+          <div class="arrow">→</div>
+          <div class="node"><div class="nk">第2步 · 蓄水挂预约</div><div class="nd">跑得好的素材<b>ADQ 加热</b> + 挂「直播预约」，蓄成品牌直播间预约池</div></div>
+          <div class="arrow">→</div>
+          <div class="node"><div class="nk">第3步 · 进直播间收割</div><div class="nd">大促日达人<b>进品牌自营直播间</b>，召回预约老粉集中收割</div></div>
+        </div>
+        <div class="logic-foot">关键动作：<b>种草不直接转化，而是「种草 → 预约 → 等大促直播间放量」——用时间换爆发。</b></div>
+      </div>
+
+      <!-- 3 与传统达播的本质区别 -->
+      <div class="step">
+        <div class="step-h"><span class="n">3</span><span class="t">与传统达播的本质区别</span><span class="sub">流量与资产从「达人侧」搬回「品牌侧」</span></div>
+        <table class="cmp">
+          <thead>
+            <tr><th style="width:20%">维度</th><th class="old" style="width:38%">传统达播</th><th class="new" style="width:42%">本模式</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="dim">流量归属</td><td class="old">达人直播间，带粉离场</td><td class="new"><b>品牌自营直播间</b>，沉淀在品牌侧</td></tr>
+            <tr><td class="dim">人群资产</td><td class="old">分散在达人账号</td><td class="new">集中到<b>品牌 5R 人群池</b></td></tr>
+            <tr><td class="dim">素材生命周期</td><td class="old">大促结束即作废</td><td class="new"><b>长期复投</b>，反哺竞价</td></tr>
+            <tr><td class="dim">归因可追踪</td><td class="old">黑盒</td><td class="new"><b>全闭环可追踪</b></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 4 如翼的反向用法 -->
+      <div class="step">
+        <div class="step-h"><span class="n">4</span><span class="t">销运洞察 · 如翼的「反向用法」</span><span class="sub">从「体检报告」升级为「投放执行指南」</span></div>
+        <div class="reverse">
+          <div class="rlead">如翼 5R 人群资产分析传统只做<b>品牌健康度诊断</b>；我们的新发现——把诊断结果<b>反过来用</b>，直接指导「种收一体」的投放执行：</div>
+          <div class="rev-grid">
+            <div class="rev"><div class="rd"><span class="from">R3 占比低</span> → <span class="to">可量化</span>需要多少互选预算补水</div></div>
+            <div class="rev"><div class="rd"><span class="from">触点结构单一</span> → <span class="to">可定向</span>需要哪种达人内容破圈</div></div>
+            <div class="rev"><div class="rd"><span class="from">层间流转堵</span> → <span class="to">可干预</span>在哪个环节加热/预约</div></div>
+          </div>
+          <div class="rfoot">种草第一次从「凭感觉花钱」变成「可算账的投资」——<b>华大用这套诊断撬动 CEO 拍板 200 万品牌预算（0 → 200 万）</b>，诺特兰德用同一套方法论按 4 个 SPU 拆出 110 万 by 商品预算。<b>诊断即撬动，可视化即销售。</b></div>
+        </div>
+      </div>
+
+      <!-- 5 三笔可归因收入 -->
+      <div class="step">
+        <div class="step-h"><span class="n">5</span><span class="t">生意逻辑 · 三笔可归因收入</span><span class="sub">每一分种草钱既攒品牌资产，又回收成新收入</span></div>
+        <div class="income-grid">
+          <div class="income">
+            <div class="ik">① 互选采买</div>
+            <div class="iv">客户品牌预算做达人内容</div>
+            <div class="im">162.5<small> 万</small></div>
+          </div>
+          <div class="income">
+            <div class="ik">② 互选加热</div>
+            <div class="iv">种草素材 ADQ 加热（截止 7.10）</div>
+            <div class="im">16.9<small> 万</small></div>
+          </div>
+          <div class="income">
+            <div class="ik">③ 大场收割</div>
+            <div class="iv">达人进直播间当天 ADQ 集中爆发</div>
+            <div class="im">约 60<small> 万 · 三场</small></div>
+          </div>
+        </div>
+        <div class="income-foot">本质：每一分种草钱既攒下品牌资产，又能回收成可归因的新收入——<b>种草 ROI 11.97，是行业均值的 17 倍。</b></div>
+      </div>
+
+      <!-- 6 标杆案例1 -->
+      <div class="step">
+        <div class="step-h"><span class="n">6</span><span class="t">标杆案例 · 万益蓝 H1 探索</span><span class="badge h1" style="margin-left:2px;">H1 已跑通</span></div>
+        <div class="story">
+          <div class="sl">📌 视频号膳食头部客户，把「达人种草 → 进自营直播」闭环第一次跑通</div>
+          <div class="grid">
+            <div class="g-item"><div class="k">如翼诊断（照出三个瓶颈）</div><div class="v">沙漏型人群结构、<b>中段流转弱</b>；新品银发益生菌日耗仅 1-3K；益生菌品类 6 月前不支持达人带货</div></div>
+            <div class="g-item"><div class="k">想清「卖给谁」（人群洞察）</div><div class="v">核心主力 = <b>上海中年女性（高净值）</b>；40+ 人群渗透率不足 = 拉新破圈机会点</div></div>
+            <div class="g-item"><div class="k">想清「找谁带」（选人思路）</div><div class="v">从「上海主持人」切入（程雷/陈蕾等），粉丝与目标人群<b>高度重合</b>；用小店如翼按匹配度反查达人</div></div>
+            <div class="g-item"><div class="k">三段式执行链路</div><div class="v">种草前置 4 个月 → 爆款素材加热挂预约 → <b>大促日达人进播单日爆发数倍于平时</b></div></div>
+            <div class="g-item wide"><div class="k">生意结果（三笔可归因收入）</div><div class="v">互选采买 <b>162.5 万</b> + 互选加热 <b>16.9 万</b> + 大场收割三场 <b>约 60 万</b>；种草 <b>ROI 11.97（行业均值 17 倍）</b></div></div>
+            <div class="q2win">
+              <div class="q2h">🚀 Q2 已见成效（种草反哺后的大盘结果）</div>
+              <div class="q2row">
+                <div class="q2m"><div class="q2n">5R 人群 ×2</div><div class="q2d">Q2 <b>品牌 5R 人群资产翻了一倍</b>——前置种草把品牌盘蓄水做实</div></div>
+                <div class="q2m"><div class="q2n">GMV 双位数环比</div><div class="q2d">Q2 GMV 突破<b>历史新高</b>，环比增长达<b>双位数</b>，<b>远超行业其他商家</b></div></div>
+              </div>
+            </div>
+          </div>
+          <div class="oneliner">一句话：<b>H1 在万益蓝把「达人种草 + 进自营直播」闭环跑通，沉淀出可复制的方法论——跑通了，H2 就能复制到其他头部客户。</b></div>
+        </div>
+      </div>
+
+      <!-- 7 H2 覆盖计划 -->
+      <div class="step">
+        <div class="step-h"><span class="n">7</span><span class="t">H2 商家覆盖计划 · 一马当先</span><span class="sub">华大重点跑通领跑 · 其余头部同步跟进 · 腰部尾部梯队推进</span></div>
+        <div class="prog-lead">✅ 从「1 个跑通样本」升级为「一马当先」——<b>华大营养作模式复制的第一个证据重点展开、率先领跑，其余头部同步在投跟进</b>：</div>
+
+        <!-- 领跑 · 华大 -->
+        <div class="hero-case">
+          <div class="hc-head">
+            <span class="crown">👑</span>
+            <span class="hc-name">领跑 · 华大营养</span>
+            <span class="hc-tag">大牌明星 + 达播补 R3 供给 · 第一个复制证据</span>
+            <span class="hc-stat">0 → 200 万</span>
+          </div>
+          <div class="hc-body">
+            <!-- 撬动四步 -->
+            <div class="hc-flow">
+              <div class="fnode"><div class="fk">① 诊断照缺口</div><div class="fv">如翼照出 <span class="rd">R3 仅 8.99%</span>（差竞品 9.55pp）、触点 <b>98.63% 全靠效果竞价</b>——过去只有 <b>CEO 尹烨一个 IP 在讲</b>华大好，品牌盘从未被投过</div></div>
+              <div class="farr">→</div>
+              <div class="fnode"><div class="fk">② 缺口反推预算</div><div class="fv">按品牌人群基数算清补 R3 需多少互选，让品牌钱变成<b>可算账的投资</b></div></div>
+              <div class="farr">→</div>
+              <div class="fnode"><div class="fk">③ 对标万益蓝数字</div><div class="fv">拿 ROI 11.97、R3 成本 ¥1.13/人 给客户看<b>钱花下去的路径</b></div></div>
+              <div class="farr">→</div>
+              <div class="fnode"><div class="fk">④ 大牌明星 + 达播补供给</div><div class="fv">撬动 <b>200 万品牌预算</b>做 99 品牌日；<b>陆毅·赵雅芝双代言</b>——从「只有 CEO 说好」到<b>让知名明星也背书</b>，绕自营达播一圈<b>集中补 R3 供给</b>；互选下单 11 单（3 上线/8 排期）</div></div>
+            </div>
+            <!-- 8 月客户端信号 -->
+            <div class="hc-signal">
+              <div class="sig-h">8 月客户端方向确认<span class="warn">（客户端自身动作 · 非 200 万兑现）</span></div>
+              <div class="sig-grid">
+                <div class="sig"><div class="sn">34.2<small> 万 +57.6%</small></div><div class="sd">日均消耗 21.7→34.2 万</div></div>
+                <div class="sig"><div class="sn">1.83<small> +10.2%</small></div><div class="sd">下单 ROI 1.66→1.83</div></div>
+                <div class="sig"><div class="sn">1.90<small> +11.6%</small></div><div class="sd">直播链路 ROI 1.70→1.90</div></div>
+                <div class="sig"><div class="sn">+2~+4</div><div class="sd">如翼行业位次三维前进</div></div>
+              </div>
+              <div class="sig-foot">主动交底：这段来自客户端批量达播 + 少量互选起量，<b>200 万正式效率兑现窗口在 9 月批 1 集中发布之后</b>——客户已用行动确认方向，完整闭环 9 月形成，4 步 SOP Q3 复用给其他头客。</div>
+            </div>
+            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/华大营养/99超品日/【对客发送·HTML版】华大营养99品牌日种草作战-20260630.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 华大营养 99 品牌日种草作战</span><span class="darr">→</span></a>
+          </div>
+        </div>
+
+        <!-- 梯队跟进 · 头部其余 4 家 -->
+        <div class="strong-lead">梯队跟进 · 头部其余在投（月 GMV 过 1000 万梯队）</div>
+        <div class="prog-grid">
+          <div class="prog explore">
+            <div class="ph"><span class="pb">02</span>诺特兰德<span class="pstat explore">KOC 小额竞价探索</span></div>
+            <div class="exp-sub">与华大「大牌明星补供给」是<b>另一条路径</b>——诺特走的是 <b>KOC 互选种草 → 进品牌自营直播间 → 小额竞价承接</b>的探索：先用低成本 KOC/达人做互选种草，把人拉进自营直播间，再用小额 ADQ 反哺，验证「进播能确定性拉动竞价」。</div>
+            <div class="exp-row">
+              <div class="exp-m"><div class="em-t">进播尝试 1 · 钙铁锌 × 梁丽（7/15）</div><div class="em-v">互选下单 <b>5250 元</b>；进播当天 ADQ 消耗 <b>2.19 万</b>（<span class="up">+338%</span>），后期日均<span class="up">稳定 +162%</span></div></div>
+              <div class="exp-m"><div class="em-t">进播尝试 2 · 维B&骨胶原 × 郑再 × 海边专场（8/8-8/9）</div><div class="em-v">互选下单 <b>1.26 万</b>；进播 ADQ 消耗 <b>6.86 万</b>（<span class="up">环比 +75.62%</span>），大场后一周日均稳定 <b>5-8 万/日</b></div></div>
+              <div class="exp-m"><div class="em-t">R3 一方包绑包 · 小额精准测试（占比 5%）</div><div class="em-v">CTR <b>4.19%</b>（<span class="up">高出 +49.1%</span>）、ROI 2.11（仅低 12.4%）；5 家里<b>诺特差距最小、CTR 提升最大</b></div></div>
+            </div>
+            <div class="exp-foot">下一步：把这套小额探索放量，按 4 个 SPU 拆 <b>110 万</b> by 商品预算（骨胶原/四维益生菌/叶黄素/烟酰胺），跑成第二条撬动证据。</div>
+            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/诺特兰德/【对客发送·HTML版】诺特兰德618复盘+Q3建议-20260706.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 诺特兰德 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
+          </div>
+          <div class="prog">
+            <div class="ph"><span class="pb">03</span>万益蓝<span class="pstat run">标杆·常规推进</span></div>
+            <div class="pd">H1 已跑通闭环回收 <b>239.4 万</b>；月 <b>50 万</b>左右常规推进，9 月中<b>《一饭封神 2》</b>IP 联动 + 全品线加热。</div>
+            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/万益蓝/【对客发送·HTML版】万益蓝618复盘+Q3建议-20260629.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 万益蓝 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
+          </div>
+          <div class="prog">
+            <div class="ph"><span class="pb">04</span>多燕瘦<span class="pstat watch">敲定中</span></div>
+            <div class="pd">敲定预算中；9~10 月从 0 搭<b>第二曲线</b>（种草矩阵首战），全靠互选加热补品牌盘。</div>
+            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/多燕瘦/【对客发送·HTML版】多燕瘦腾讯营销种草作战-20260709.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 多燕瘦腾讯营销种草作战</span><span class="darr">→</span></a>
+          </div>
+          <div class="prog">
+            <div class="ph"><span class="pb">05</span>五个女博士<span class="pstat watch">沟通中</span></div>
+            <div class="pd">沟通<b>内容力提升</b>阶段，导入诊断→撬动→承接链路。</div>
+          </div>
+          <div class="prog tail">
+            <div class="ph"><span class="pb">＋</span>腰部 & 后期梯队<span class="pstat watch">规划中</span></div>
+            <div class="pd">腰部沟通中：江中（升级后首轮 <b>20 万</b>）/斐萃（by 新品 10~50 万）/inne（20 万）/vik（洽谈）先进如翼跑通链路；后期<b>通用《如翼指南》+ 自助工具化</b>，联动渠道做整体覆盖，H2 目标 <b>50+ 家</b>。</div>
+            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/09-培训资料/如翼产品知识库/03-膳食实战案例/【对客通用】膳食商家如翼使用指南-通用版-20260706.md" target="_blank"><span class="di">📘</span>腰部通用抓手 <span class="dn">· 膳食商家如翼使用指南（对客通用版）</span><span class="darr">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 收口：需要内部协助 -->
+      <div class="goalcard">
+        <div class="gtitle">🛠 核心课题：让「种草 → 成交」全链路可归因，需要产品与平台协助</div>
+        <div class="gsub">已实现「看清人群」，下一步核心卡点是两件事：<b>自然域数据接入</b>（小店侧 8 月底~9 月初）+ <b>种草效果可归因论证</b>——有了正向结果才能撬动平台合规合作与更多客户投入。<span class="st talking">已沟通中</span>=已进产品评估/测试排期，<span class="st todo">待推进</span>=需继续对齐推动。</div>
+        <div class="roles">
+          <div class="role p0">
+            <div class="rh"><span>① 数据源完善（当务之急）</span><span class="cnt">🔴 P0</span></div>
+            <ul>
+              <li><b>小店自然域数据接入</b>（含微信豆 + 自然流）——种收一体核心基建，接入后可看清种草人群是否真正成交<span class="st talking">沟通中 · 8 月底~9 月初上线</span></li>
+              <li><b>达播/互选后向自营直播间的溢流转化归因</b>：覆盖「达人进播收割」（万益蓝）与「纯互选素材授权硬广」（华大）两类场景<span class="st talking">沟通中 · 需求评估/前置测试</span></li>
+              <li><b>达播全域人群资产沉淀</b>：支撑达播后人群追投（依赖自然域接入完成）<span class="st todo">待推进 · 依赖自然域合规通过</span></li>
+            </ul>
+          </div>
+          <div class="role">
+            <div class="rh"><span>② 归因论证 & 精细化能力</span><span class="cnt">🟡 P1</span></div>
+            <ul>
+              <li><b>一方包投放效果按人群层级细拆 ROI</b> + 识别「店铺新客」占比——用「新客价值 + 后续复购」论证 R3 长期价值<span class="st todo">待推进 · 需求待评估</span></li>
+              <li><b>种草效果追踪到达人</b>：互选 R1-R3 蓄水数据拆到达人直播间名称与日期，直接指导下一轮选号<span class="st todo">待推进 · 需求待评估</span></li>
+              <li><b>按单个直播间维度拆分 5R</b>（一店多播/一品一播）+ 品线间人群流转重合分析，避免串流退单<span class="st todo">待推进 · 需求待评估</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="metric">
+          <div class="m"><div class="mn">1→5</div><div class="md">跑通样本 → 头部在投</div></div>
+          <div class="m"><div class="mn">¥239.4万</div><div class="md">万益蓝 H1 已回收（采买+加热+收割）</div></div>
+          <div class="m"><div class="mn">ROI 11.97</div><div class="md">种草 ROI（行业 17 倍）</div></div>
+          <div class="m"><div class="mn">1 套</div><div class="md">可复制的种收一体 SOP</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
