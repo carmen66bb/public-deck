@@ -84,6 +84,33 @@
   .step-h .t{font-size:16px;font-weight:800;color:var(--ink);}
   .step-h .sub{font-size:12.5px;color:var(--ink3);font-weight:600;margin-left:2px;}
 
+  /* 诊断演示屏 · 三种病三卡 */
+  .diag-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
+  .diag{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;box-shadow:0 2px 10px rgba(15,30,50,.04);}
+  .diag-thin{border-top:3px solid var(--red);}
+  .diag-good{border-top:3px solid var(--green);}
+  .diag-block{border-top:3px solid var(--orange);}
+  .dg-head{display:flex;align-items:center;justify-content:space-between;padding:11px 14px;border-bottom:1px solid var(--line);}
+  .dg-name{font-size:15px;font-weight:800;color:var(--ink);}
+  .dg-tag{font-size:11px;font-weight:800;letter-spacing:.5px;padding:3px 10px;border-radius:6px;}
+  .dg-tag-thin{background:var(--red-soft);color:var(--red);border:1px solid var(--red-line);}
+  .dg-tag-good{background:var(--green-soft);color:var(--green);border:1px solid #cfead9;}
+  .dg-tag-block{background:var(--orange-soft);color:var(--orange);border:1px solid var(--orange-line);}
+  .dg-body{padding:12px 14px 14px;}
+  .dg-line{display:flex;flex-direction:column;gap:2px;margin-bottom:9px;}
+  .dg-k{font-size:11px;color:var(--ink3);font-weight:700;}
+  .dg-v{font-size:14px;font-weight:800;}
+  .dg-v small{font-size:11px;font-weight:700;color:var(--ink3);margin-left:3px;}
+  .dg-v.dg-bad{color:var(--red);}
+  .dg-v.dg-ok{color:var(--green);}
+  .dg-diag{margin-top:4px;font-size:12px;color:var(--ink2);font-weight:600;background:#fbfbfc;border:1px dashed var(--line);border-radius:8px;padding:9px 11px;line-height:1.5;}
+  .dg-diag b{color:var(--ink);}
+  .diag-hook{display:flex;align-items:flex-start;gap:11px;margin-top:12px;background:var(--teal-soft);border:1px solid var(--teal-line);border-radius:11px;padding:13px 16px;}
+  .diag-hook .dh-icon{font-size:22px;line-height:1.3;flex-shrink:0;}
+  .diag-hook .dh-text{font-size:13px;color:var(--ink2);font-weight:600;line-height:1.6;}
+  .diag-hook .dh-text b{color:var(--teal-deep);}
+  .diag-hook .dh-text .dh-em{display:block;margin-top:5px;color:var(--ink2);font-weight:600;}
+
   /* 痛点三卡 */
   .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;}
   .pain{background:var(--red-soft);border:1px solid var(--red-line);border-radius:11px;padding:13px 15px;border-top:3px solid var(--red);}
@@ -207,7 +234,22 @@
   .prog .pd b{color:var(--teal-deep);}
   .prog.tail{grid-column:1 / -1;border-top-color:var(--ink3);background:#fbfbfc;}
 
-  /* 诺特兰德 · KOC 小额竞价探索加宽卡 */
+  /* 诺特兰德 · 探索版 case（与华大领跑平级，橙色系区分：另一条路径） */
+  .explore-case{background:linear-gradient(135deg,#fdf4ec,#fdefe4);border:1.5px solid var(--orange);border-radius:14px;padding:0;overflow:hidden;margin-bottom:14px;box-shadow:0 4px 16px rgba(232,114,42,.10);}
+  .explore-case .hc-head{display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--orange),#c85e1e);padding:12px 18px;}
+  .explore-case .hc-head .crown{font-size:16px;}
+  .explore-case .hc-head .hc-name{font-size:16px;font-weight:800;color:#fff;}
+  .explore-case .hc-head .hc-tag{font-size:11px;font-weight:800;letter-spacing:1px;color:#fff;background:rgba(255,255,255,.22);padding:3px 10px;border-radius:5px;}
+  .explore-case .hc-head .hc-stat{margin-left:auto;font-size:11.5px;font-weight:800;color:var(--orange);background:#fff;padding:3px 11px;border-radius:10px;}
+  .explore-case .hc-body{padding:16px 18px;}
+  .explore-case .hc-flow .fnode{border-color:var(--orange-line);}
+  .explore-case .hc-flow .fnode .fk{color:#c85e1e;}
+  .explore-case .hc-flow .farr{color:var(--orange);}
+  .explore-case .doclink{border-color:var(--orange-line);background:#fff;color:#c85e1e;}
+  .explore-case .doclink:hover{background:var(--orange-soft);border-color:var(--orange);}
+  .explore-case .doclink .darr{color:var(--orange);}
+
+  /* 诺特兰德 · KOC 小额竞价探索加宽卡（旧样式，探索屏内继续复用 exp-row） */
   .prog.explore{grid-column:1 / -1;border-top-color:var(--orange);background:var(--orange-soft);}
   .prog.explore .ph .pb{background:var(--orange);}
   .prog.explore .pstat.explore{background:#fff;color:var(--orange);border:1px solid var(--orange-line);}
@@ -260,7 +302,7 @@
   .st.todo{background:#fff2e0;color:#c46a0a;border:1px solid #f4d5a8;}
 
   @media(max-width:680px){
-    .grid,.roles,.prog-grid,.pain-grid,.rev-grid,.income-grid{grid-template-columns:1fr;}
+    .grid,.roles,.prog-grid,.pain-grid,.rev-grid,.income-grid,.diag-grid{grid-template-columns:1fr;}
     .chain{flex-direction:column;}
     .chain .arrow{transform:rotate(90deg);padding:4px 0;}
     .cmp{font-size:11.5px;}
@@ -288,6 +330,41 @@
         <div class="vh-bottom">
           <div class="vh-tag">一条可复制的路径</div>
           <p>用<span class="em">如翼人群资产诊断</span>找到品牌盘缺口，用<span class="em">达人内容前置种草蓄水</span>，再把达人请进<span class="em">品牌自营直播间集中收割</span>，素材沉淀为可长期复投的竞价资产——让<span class="em">种草与收割第一次真正闭环</span>。</p>
+        </div>
+      </div>
+
+      <!-- 0 诊断演示屏 -->
+      <div class="step">
+        <div class="step-h"><span class="n">0</span><span class="t">先看一眼「同一台如翼，照出三种病」</span><span class="sub">同一套 5R 人群诊断，三个头部客户照出三种完全不同的生意病</span></div>
+        <div class="diag-grid">
+          <div class="diag diag-thin">
+            <div class="dg-head"><span class="dg-name">华大营养</span><span class="dg-tag dg-tag-thin">缺水型</span></div>
+            <div class="dg-body">
+              <div class="dg-line"><span class="dg-k">R3 种草层占比</span><span class="dg-v dg-bad">仅 8.99%<small>（差竞品 9.55pp）</small></span></div>
+              <div class="dg-line"><span class="dg-k">触点结构</span><span class="dg-v dg-bad">98.63% 全靠效果竞价</span></div>
+              <div class="dg-diag">上面没水、只靠竞价割存量——<b>前端缺弹药</b></div>
+            </div>
+          </div>
+          <div class="diag diag-good">
+            <div class="dg-head"><span class="dg-name">万益蓝</span><span class="dg-tag dg-tag-good">健康型</span></div>
+            <div class="dg-body">
+              <div class="dg-line"><span class="dg-k">互选触点占比</span><span class="dg-v dg-ok">17.37%<small>（内容盘充足）</small></span></div>
+              <div class="dg-line"><span class="dg-k">品牌 5R 人群资产</span><span class="dg-v dg-ok">Q2 翻了一倍</span></div>
+              <div class="dg-diag">种草蓄水做实、闭环跑通——<b>可复制样本</b></div>
+            </div>
+          </div>
+          <div class="diag diag-block">
+            <div class="dg-head"><span class="dg-name">诺特兰德</span><span class="dg-tag dg-tag-block">堵塞型</span></div>
+            <div class="dg-body">
+              <div class="dg-line"><span class="dg-k">R3 存量</span><span class="dg-v dg-ok">膳食赛道断层第一</span></div>
+              <div class="dg-line"><span class="dg-k">品牌词自然搜索</span><span class="dg-v dg-bad">占比 &lt; 0.1%</span></div>
+              <div class="dg-diag">规模第一 ≠ 心智第一——<b>有量没牌</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="diag-hook">
+          <span class="dh-icon">🔮</span>
+          <div class="dh-text">照出病之后，如翼还能<b>反过来开药</b>——用「水晶球」人群画像<b>反推代言人 / 达人</b>：谁的粉丝和品牌目标人群最重合，就找谁。<span class="dh-em">华大就是这样从画像反推出「知性 · 有烟火气 · 35–50 岁」方向，把选人从「拍脑袋」变成「照数据」。</span></div>
         </div>
       </div>
 
@@ -353,7 +430,7 @@
             <div class="rev"><div class="rd"><span class="from">触点结构单一</span> → <span class="to">可定向</span>需要哪种达人内容破圈</div></div>
             <div class="rev"><div class="rd"><span class="from">层间流转堵</span> → <span class="to">可干预</span>在哪个环节加热/预约</div></div>
           </div>
-          <div class="rfoot">种草第一次从「凭感觉花钱」变成「可算账的投资」——<b>华大用这套诊断撬动 CEO 拍板 200 万品牌预算（0 → 200 万）</b>，诺特兰德用同一套方法论按 4 个 SPU 拆出 110 万 by 商品预算。<b>诊断即撬动，可视化即销售。</b></div>
+          <div class="rfoot">种草第一次从「凭感觉花钱」变成「可算账的投资」——<b>华大用这套诊断撬动 CEO 拍板从 0 到百万级品牌预算</b>，诺特兰德用同一套方法论按 4 个 SPU 拆出百万级 by 商品预算。<b>诊断即撬动，可视化即销售。</b></div>
         </div>
       </div>
 
@@ -364,20 +441,20 @@
           <div class="income">
             <div class="ik">① 互选采买</div>
             <div class="iv">客户品牌预算做达人内容</div>
-            <div class="im">162.5<small> 万</small></div>
+            <div class="im">百万级<small> 主力</small></div>
           </div>
           <div class="income">
             <div class="ik">② 互选加热</div>
             <div class="iv">种草素材 ADQ 加热（截止 7.10）</div>
-            <div class="im">16.9<small> 万</small></div>
+            <div class="im">十万级<small> 加投</small></div>
           </div>
           <div class="income">
             <div class="ik">③ 大场收割</div>
             <div class="iv">达人进直播间当天 ADQ 集中爆发</div>
-            <div class="im">约 60<small> 万 · 三场</small></div>
+            <div class="im">数十万<small> · 三场</small></div>
           </div>
         </div>
-        <div class="income-foot">本质：每一分种草钱既攒下品牌资产，又能回收成可归因的新收入——<b>沉淀一个 R3 人群资产仅 ¥1.13，而效果竞价的一次点击就要花掉数倍价钱且沉淀不下来。</b></div>
+        <div class="income-foot">本质：每一分种草钱既攒下品牌资产，又能回收成可归因的新收入——<b>沉淀一个 R3 人群资产仅个位数分钱，而效果竞价的一次点击就要花掉数倍价钱且沉淀不下来。</b></div>
       </div>
 
       <!-- 6 标杆案例1 -->
@@ -386,11 +463,11 @@
         <div class="story">
           <div class="sl">📌 视频号膳食头部客户，把「达人种草 → 进自营直播」闭环第一次跑通</div>
           <div class="grid">
-            <div class="g-item"><div class="k">如翼诊断（照出三个瓶颈）</div><div class="v">沙漏型人群结构、<b>中段流转弱</b>；新品银发益生菌日耗仅 1-3K；益生菌品类 6 月前不支持达人带货</div></div>
+            <div class="g-item"><div class="k">如翼诊断（照出三个瓶颈）</div><div class="v">沙漏型人群结构、<b>中段流转弱</b>；新品银发益生菌<b>日耗极低</b>；益生菌品类 6 月前不支持达人带货</div></div>
             <div class="g-item"><div class="k">想清「卖给谁」（人群洞察）</div><div class="v">核心主力 = <b>上海中年女性（高净值）</b>；40+ 人群渗透率不足 = 拉新破圈机会点</div></div>
             <div class="g-item"><div class="k">想清「找谁带」（选人思路）</div><div class="v">从「上海主持人」切入（程雷/陈蕾等），粉丝与目标人群<b>高度重合</b>；用小店如翼按匹配度反查达人</div></div>
             <div class="g-item"><div class="k">三段式执行链路</div><div class="v">种草前置 4 个月 → 爆款素材加热挂预约 → <b>大促日达人进播单日爆发数倍于平时</b></div></div>
-            <div class="g-item wide"><div class="k">生意结果（三笔可归因收入）</div><div class="v">互选采买 <b>162.5 万</b> + 互选加热 <b>16.9 万</b> + 大场收割三场 <b>约 60 万</b>，H1 合计 <b>约 239.4 万</b>可归因收入</div></div>
+            <div class="g-item wide"><div class="k">生意结果（三笔可归因收入）</div><div class="v">互选采买（<b>百万级</b>主力）+ 互选加热（<b>十万级</b>）+ 大场收割三场（<b>数十万</b>），H1 合计<b>百万级</b>可归因收入</div></div>
             <div class="q2win">
               <div class="q2h">🚀 Q2 已见成效（种草反哺后的大盘结果）</div>
               <div class="q2row">
@@ -414,7 +491,7 @@
             <span class="crown">👑</span>
             <span class="hc-name">领跑 · 华大营养</span>
             <span class="hc-tag">大牌明星 + 达播补 R3 供给 · 第一个复制证据</span>
-            <span class="hc-stat">0 → 200 万</span>
+            <span class="hc-stat">0 → 百万级</span>
           </div>
           <div class="hc-body">
             <!-- 撬动四步 -->
@@ -423,48 +500,59 @@
               <div class="farr">→</div>
               <div class="fnode"><div class="fk">② 缺口反推预算</div><div class="fv">按品牌人群基数算清补 R3 需多少互选，让品牌钱变成<b>可算账的投资</b></div></div>
               <div class="farr">→</div>
-              <div class="fnode"><div class="fk">③ 对标万益蓝数字</div><div class="fv">拿 R3 沉淀成本 <b>¥1.13/人</b> 给客户看<b>钱花下去的路径</b></div></div>
+              <div class="fnode"><div class="fk">③ 对标万益蓝数字</div><div class="fv">拿 R3 沉淀成本<b>低到个位数分钱/人</b>给客户看<b>钱花下去的路径</b></div></div>
               <div class="farr">→</div>
-              <div class="fnode"><div class="fk">④ 大牌明星 + 达播补供给</div><div class="fv">撬动 <b>200 万品牌预算</b>做 99 品牌日；<b>陆毅·赵雅芝双代言</b>——从「只有 CEO 说好」到<b>让知名明星也背书</b>，绕自营达播一圈<b>集中补 R3 供给</b>；互选下单 11 单（3 上线/8 排期）</div></div>
+              <div class="fnode"><div class="fk">④ 大牌明星 + 达播补供给</div><div class="fv">撬动<b>百万级品牌预算</b>做 99 品牌日；<b>陆毅·赵雅芝双代言</b>——从「只有 CEO 说好」到<b>让知名明星也背书</b>，绕自营达播一圈<b>集中补 R3 供给</b>；互选下单 11 单（3 上线/8 排期）</div></div>
             </div>
             <!-- 8 月客户端信号 -->
             <div class="hc-signal">
-              <div class="sig-h">8 月客户端方向确认<span class="warn">（客户端自身动作 · 非 200 万兑现）</span></div>
+              <div class="sig-h">8 月客户端方向确认<span class="warn">（客户端自身动作 · 非正式预算兑现）</span></div>
               <div class="sig-grid">
-                <div class="sig"><div class="sn">34.2<small> 万 +57.6%</small></div><div class="sd">日均消耗 21.7→34.2 万</div></div>
+                <div class="sig"><div class="sn">日耗<small> +57.6%</small></div><div class="sd">日均消耗环比大幅抬升</div></div>
                 <div class="sig"><div class="sn">1.83<small> +10.2%</small></div><div class="sd">下单 ROI 1.66→1.83</div></div>
                 <div class="sig"><div class="sn">1.90<small> +11.6%</small></div><div class="sd">直播链路 ROI 1.70→1.90</div></div>
                 <div class="sig"><div class="sn">+2~+4</div><div class="sd">如翼行业位次三维前进</div></div>
               </div>
-              <div class="sig-foot">主动交底：这段来自客户端批量达播 + 少量互选起量，<b>200 万正式效率兑现窗口在 9 月批 1 集中发布之后</b>——客户已用行动确认方向，完整闭环 9 月形成，4 步 SOP Q3 复用给其他头客。</div>
+              <div class="sig-foot">主动交底：这段来自客户端批量达播 + 少量互选起量，<b>正式效率兑现窗口在 9 月批 1 集中发布之后</b>——客户已用行动确认方向，完整闭环 9 月形成，4 步 SOP Q3 复用给其他头客。</div>
             </div>
-            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/华大营养/99超品日/【对客发送·HTML版】华大营养99品牌日种草作战-20260630.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 华大营养 99 品牌日种草作战</span><span class="darr">→</span></a>
+            <a class="doclink" href="https://carmen66bb.github.io/workingbb-public/%E5%8D%8E%E5%A4%A7%E8%90%A5%E5%85%BB99%E5%93%81%E7%89%8C%E6%97%A5/" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 华大营养 99 品牌日种草作战</span><span class="darr">→</span></a>
+            <a class="doclink" href="https://doc.weixin.qq.com/doc/w3_AcQAYgblAHkCNFeNZ5AHkRAWNdauv?scode=AJEAIQdfAAoM0qq8L0AcQAYgblAHk" target="_blank"><span class="di">📐</span>方法论出处 <span class="dn">· 如翼生意诊断五步法（分享版）</span><span class="darr">→</span></a>
           </div>
         </div>
 
-        <!-- 梯队跟进 · 头部其余 4 家 -->
-        <div class="strong-lead">梯队跟进 · 头部其余在投（月 GMV 过 1000 万梯队）</div>
-        <div class="prog-grid">
-          <div class="prog explore">
-            <div class="ph"><span class="pb">02</span>诺特兰德<span class="pstat explore">KOC 小额竞价探索</span></div>
-            <div class="exp-sub">与华大「大牌明星补供给」是<b>另一条路径</b>——诺特走的是 <b>KOC 互选种草 → 进品牌自营直播间 → 小额竞价承接</b>的探索：先用低成本 KOC/达人做互选种草，把人拉进自营直播间，再用小额 ADQ 反哺，验证「进播能确定性拉动竞价」。</div>
-            <div class="exp-row">
-              <div class="exp-m"><div class="em-t">进播尝试 1 · 钙铁锌 × 梁丽（7/15）</div><div class="em-v">互选下单 <b>5250 元</b>；进播当天 ADQ 消耗 <b>2.19 万</b>（<span class="up">+338%</span>），后期日均<span class="up">稳定 +162%</span></div></div>
-              <div class="exp-m"><div class="em-t">进播尝试 2 · 维B&骨胶原 × 郑再 × 海边专场（8/8-8/9）</div><div class="em-v">互选下单 <b>1.26 万</b>；进播 ADQ 消耗 <b>6.86 万</b>（<span class="up">环比 +75.62%</span>），大场后一周日均稳定 <b>5-8 万/日</b></div></div>
-              <div class="exp-m"><div class="em-t">R3 一方包绑包 · 小额精准测试（占比 5%）</div><div class="em-v">CTR <b>4.19%</b>（<span class="up">高出 +49.1%</span>）、ROI 2.11（仅低 12.4%）；5 家里<b>诺特差距最小、CTR 提升最大</b></div></div>
-            </div>
-            <div class="exp-foot">下一步：把这套小额探索放量，按 4 个 SPU 拆 <b>110 万</b> by 商品预算（骨胶原/四维益生菌/叶黄素/烟酰胺），跑成第二条撬动证据。</div>
-            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/诺特兰德/【对客发送·HTML版】诺特兰德618复盘+Q3建议-20260706.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 诺特兰德 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
+        <!-- 第二条路径 · 诺特兰德（回扣 step0「堵塞型」） -->
+        <div class="explore-case">
+          <div class="hc-head">
+            <span class="crown">🧭</span>
+            <span class="hc-name">第二条路径 · 诺特兰德</span>
+            <span class="hc-tag">堵塞型 · KOC 进播 + 小额竞价承接 · 另一条撬动证据</span>
+            <span class="hc-stat">目标 0 → 百万级</span>
           </div>
+          <div class="hc-body">
+            <div class="hc-flow">
+              <div class="fnode"><div class="fk">① 诊断照缺口（堵塞型）</div><div class="fv">如翼照出<b>规模断层第一</b>（种草人群超 99.99%、R3 存量断层第一），但<span class="rd">种草率比类目均值低 76.47%</span>、<span class="rd">R3→R4 中段转化仅 4.47%</span>（行业健康值 15%）——<b>有量没牌、中段堵死</b>，规模第一 ≠ 心智第一</div></div>
+              <div class="farr">→</div>
+              <div class="fnode"><div class="fk">② 缺口反推打法</div><div class="fv">病根不在拉新在<b>中段疏通</b>——用 <b>KOC 互选种草</b>补品牌内容供给、把人<b>拉进品牌自营直播间</b>疏通 R3→R4，再用<b>小额 ADQ 承接</b>验证「进播能确定性拉动竞价」</div></div>
+              <div class="farr">→</div>
+              <div class="fnode"><div class="fk">③ 真实数字（进播已验证）</div><div class="fv">进播尝试 1（钙铁锌×梁丽 7/15）：ADQ 当天<b>飙升</b>（<span style="color:var(--orange);font-weight:800;">+338%</span>）、后期日均稳 +162%；尝试 2（郑再海边专场 8/8-9）：ADQ<b>大幅拉升</b>（+75.62%）、一周持续走高；R3 绑包 CTR <b>4.19%</b>（+49.1%）<b>5 家里提升最大</b></div></div>
+            </div>
+            <div class="exp-foot">下一步：把这套小额探索放量，按 4 个 SPU 拆<b>百万级</b> by 商品预算（骨胶原 / 四维益生菌 / 叶黄素 / 烟酰胺），跑成继华大之后<b>第二条撬动证据</b>——同一套如翼诊断，走通「堵塞型」客户的疏通路径。</div>
+            <a class="doclink" href="https://carmen66bb.github.io/notland-client/" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 诺特兰德 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
+          </div>
+        </div>
+
+        <!-- 梯队跟进 -->
+        <div class="strong-lead">梯队跟进 · 头部其余在投（头部梯队）</div>
+        <div class="prog-grid">
           <div class="prog">
             <div class="ph"><span class="pb">03</span>万益蓝<span class="pstat run">标杆·常规推进</span></div>
-            <div class="pd">H1 已跑通闭环回收 <b>239.4 万</b>；月 <b>50 万</b>左右常规推进，9 月中<b>《一饭封神 2》</b>IP 联动 + 全品线加热。</div>
-            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/万益蓝/【对客发送·HTML版】万益蓝618复盘+Q3建议-20260629.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 万益蓝 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
+            <div class="pd">H1 已跑通闭环回收<b>百万级</b>；<b>月度常规</b>推进，9 月中<b>《一饭封神 2》</b>IP 联动 + 全品线加热。</div>
+            <a class="doclink" href="https://carmen66bb.github.io/wonderlab-618-review/" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 万益蓝 618 复盘 + Q3 建议</span><span class="darr">→</span></a>
           </div>
           <div class="prog">
             <div class="ph"><span class="pb">04</span>多燕瘦<span class="pstat watch">敲定中</span></div>
             <div class="pd">敲定预算中；9~10 月从 0 搭<b>第二曲线</b>（种草矩阵首战），全靠互选加热补品牌盘。</div>
-            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/01-重点品牌/多燕瘦/【对客发送·HTML版】多燕瘦腾讯营销种草作战-20260709.html" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 多燕瘦腾讯营销种草作战</span><span class="darr">→</span></a>
+            <a class="doclink" href="https://carmen66bb.github.io/workingbb-public/%E5%A4%9A%E7%87%95%E7%98%A6/" target="_blank"><span class="di">📄</span>依据如翼生意数据的对客方案 <span class="dn">· 多燕瘦腾讯营销种草作战</span><span class="darr">→</span></a>
           </div>
           <div class="prog">
             <div class="ph"><span class="pb">05</span>五个女博士<span class="pstat watch">沟通中</span></div>
@@ -472,8 +560,8 @@
           </div>
           <div class="prog tail">
             <div class="ph"><span class="pb">＋</span>腰部 & 后期梯队<span class="pstat watch">规划中</span></div>
-            <div class="pd">腰部沟通中：江中（升级后首轮 <b>20 万</b>）/斐萃（by 新品 10~50 万）/inne（20 万）/vik（洽谈）先进如翼跑通链路；后期<b>通用《如翼指南》+ 自助工具化</b>，联动渠道做整体覆盖，H2 目标 <b>50+ 家</b>。</div>
-            <a class="doclink" href="file:///Users/carmen/CodeBuddy/膳食生力军/knowledge-base/09-培训资料/如翼产品知识库/03-膳食实战案例/【对客通用】膳食商家如翼使用指南-通用版-20260706.md" target="_blank"><span class="di">📘</span>腰部通用抓手 <span class="dn">· 膳食商家如翼使用指南（对客通用版）</span><span class="darr">→</span></a>
+            <div class="pd">腰部沟通中：江中（升级后首轮<b>试水</b>）/斐萃（by 新品）/inne/vik（洽谈）先进如翼跑通链路；后期<b>通用《如翼指南》+ 自助工具化</b>，联动渠道做整体覆盖，H2 目标 <b>50+ 家</b>。</div>
+            <a class="doclink" href="https://doc.weixin.qq.com/doc/w3_AcQAYgblAHkCN01vuh0VNRrasLZWV?scode=AJEAIQdfAAoi4XDmLuAcQAYgblAHk" target="_blank"><span class="di">📘</span>腰部通用抓手 <span class="dn">· 膳食商家如翼使用指南（通用版）</span><span class="darr">→</span></a>
           </div>
         </div>
       </div>
@@ -502,8 +590,8 @@
         </div>
         <div class="metric">
           <div class="m"><div class="mn">1→5</div><div class="md">跑通样本 → 头部在投</div></div>
-          <div class="m"><div class="mn">¥239.4万</div><div class="md">万益蓝 H1 已回收（采买+加热+收割）</div></div>
-          <div class="m"><div class="mn">¥1.13</div><div class="md">单个 R3 人群沉淀成本</div></div>
+          <div class="m"><div class="mn">百万级</div><div class="md">万益蓝 H1 已回收（采买+加热+收割）</div></div>
+          <div class="m"><div class="mn">个位数分钱</div><div class="md">单个 R3 人群沉淀成本</div></div>
           <div class="m"><div class="mn">1 套</div><div class="md">可复制的种收一体 SOP</div></div>
         </div>
       </div>
