@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>华大营养 2026 Q3 复盘 + 双十一策略报告</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root{
+    --blue:#1a5ed6; --blue-dark:#0d3a8a; --blue-light:#e8f0fe;
+    --ink:#1a2230; --gray:#5a6578; --line:#e5e9f0; --bg:#f4f6fb;
+    --green:#17a673; --red:#e5484d; --amber:#f59e0b; --purple:#7c5cff;
+    --card:#ffffff;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+    background:var(--bg);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+
+  /* 封面 */
+  .cover{background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,#2f7df0 100%);
+    color:#fff;padding:70px 0 60px;position:relative;overflow:hidden}
+  .cover::after{content:"";position:absolute;right:-80px;top:-80px;width:360px;height:360px;
+    border-radius:50%;background:rgba(255,255,255,.08)}
+  .cover::before{content:"";position:absolute;right:120px;bottom:-120px;width:260px;height:260px;
+    border-radius:50%;background:rgba(255,255,255,.06)}
+  .cover .wrap{position:relative;z-index:2}
+  .tag{display:inline-block;background:rgba(255,255,255,.18);padding:6px 14px;border-radius:20px;
+    font-size:13px;letter-spacing:1px;margin-bottom:20px;backdrop-filter:blur(4px)}
+  .cover h1{font-size:40px;font-weight:800;line-height:1.25;margin-bottom:16px}
+  .cover .sub{font-size:17px;opacity:.9;max-width:620px}
+  .cover .meta{margin-top:30px;display:flex;gap:30px;flex-wrap:wrap;font-size:14px;opacity:.85}
+  .cover .meta b{display:block;font-size:22px;font-weight:700;opacity:1;margin-bottom:2px}
+
+  /* 导航 */
+  nav{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);z-index:100}
+  nav .wrap{display:flex;gap:4px;overflow-x:auto;padding:0 20px}
+  nav a{padding:14px 16px;font-size:14px;color:var(--gray);text-decoration:none;white-space:nowrap;
+    border-bottom:2px solid transparent;transition:.2s}
+  nav a:hover{color:var(--blue)}
+
+  section{padding:46px 0 10px}
+  .sec-head{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .sec-num{width:40px;height:40px;background:var(--blue);color:#fff;border-radius:11px;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:18px;flex-shrink:0}
+  .sec-head h2{font-size:25px;font-weight:800}
+  .sec-desc{color:var(--gray);font-size:15px;margin:0 0 26px 54px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px 28px;
+    margin-bottom:22px;box-shadow:0 2px 14px rgba(20,40,90,.04)}
+  .card h3{font-size:18px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+  .card h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--blue)}
+  .card .note{color:var(--gray);font-size:14px;margin-bottom:18px}
+
+  /* KPI 卡 */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:22px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden}
+  .kpi .v{font-size:27px;font-weight:800;color:var(--blue-dark);line-height:1.1}
+  .kpi .v small{font-size:15px;font-weight:700;color:var(--gray)}
+  .kpi .l{font-size:13px;color:var(--gray);margin-top:6px}
+  .kpi .trend{font-size:12px;margin-top:8px;font-weight:600}
+  .kpi.up{border-left:4px solid var(--green)} .kpi.up .trend{color:var(--green)}
+  .kpi.down{border-left:4px solid var(--red)} .kpi.down .trend{color:var(--red)}
+  .kpi.flat{border-left:4px solid var(--blue)}
+
+  .chart-box{position:relative;height:320px;margin-top:6px}
+  .chart-box.sm{height:280px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+  .grid2 .card{margin-bottom:0}
+
+  table{width:100%;border-collapse:collapse;font-size:14px;margin-top:4px}
+  th,td{padding:11px 12px;text-align:left;border-bottom:1px solid var(--line)}
+  th{background:var(--blue-light);color:var(--blue-dark);font-weight:700;font-size:13px}
+  tr:last-child td{border-bottom:none}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  .badge{display:inline-block;padding:2px 9px;border-radius:12px;font-size:12px;font-weight:600}
+  .b-up{background:#e3f6ee;color:var(--green)} .b-down{background:#fdeaea;color:var(--red)}
+  .b-star{background:#fff4e0;color:#b4740a} .b-flat{background:var(--blue-light);color:var(--blue)}
+
+  .insight{border-left:4px solid var(--blue);background:var(--blue-light);padding:16px 20px;border-radius:0 12px 12px 0;margin:16px 0}
+  .insight.warn{border-color:var(--amber);background:#fff8ec}
+  .insight.good{border-color:var(--green);background:#eafaf3}
+  .insight b{color:var(--blue-dark)}
+  .insight .t{font-weight:700;margin-bottom:4px;font-size:15px}
+
+  .quote{font-size:17px;font-weight:600;color:var(--blue-dark);background:linear-gradient(90deg,var(--blue-light),transparent);
+    padding:18px 22px;border-radius:12px;border-left:5px solid var(--blue);margin:8px 0}
+
+  /* 修正对比 */
+  .fix{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:14px}
+  .fix>div{padding:14px 16px;font-size:14px}
+  .fix .h{background:#f0f3f9;font-weight:700;font-size:13px;color:var(--gray)}
+  .fix .old{color:var(--gray)}
+  .fix .new{color:var(--ink);font-weight:600;background:#f7faff}
+  .fix>div:nth-child(n+4){border-top:1px solid var(--line)}
+
+  /* 三件事 */
+  .three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:10px}
+  .three .t-card{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--card)}
+  .three .t-card .ic{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px}
+  .three .t-card h4{font-size:16px;margin-bottom:10px}
+  .three .t-card p{font-size:13px;color:var(--gray);margin-bottom:8px}
+  .three .t-card .k{font-weight:700;color:var(--ink)}
+
+  /* TODO */
+  .todo-role{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-bottom:16px}
+  .todo-role .rh{padding:14px 20px;font-weight:700;color:#fff;display:flex;align-items:center;gap:10px}
+  .todo-role ul{list-style:none;padding:16px 22px}
+  .todo-role li{padding:7px 0 7px 26px;position:relative;font-size:14px;border-bottom:1px dashed var(--line)}
+  .todo-role li:last-child{border-bottom:none}
+  .todo-role li::before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
+  .r-op{background:var(--blue)} .r-plan{background:var(--purple)} .r-biz{background:var(--green)} .r-you{background:var(--amber)}
+
+  .asks{counter-reset:ask}
+  .ask{display:flex;gap:16px;align-items:flex-start;padding:16px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;background:#fffdf6}
+  .ask .n{counter-increment:ask;width:32px;height:32px;background:var(--amber);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0}
+  .ask .n::before{content:counter(ask)}
+  .ask .txt b{color:var(--ink)}
+
+  /* 客户数增长可视化 */
+  .growth{display:flex;align-items:stretch;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+  .growth .g-box{flex:1;min-width:150px;border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fafbfe;display:flex;flex-direction:column;justify-content:center}
+  .growth .g-flow{display:flex;align-items:center;gap:10px}
+  .growth .g-flow .num{font-size:30px;font-weight:800;color:var(--gray);line-height:1}
+  .growth .g-flow .num.to{color:var(--blue-dark)}
+  .growth .g-flow .arr{font-size:22px;color:var(--green);font-weight:800}
+  .growth .g-unit{font-size:14px;color:var(--gray);font-weight:600}
+  .growth .g-label{font-size:13px;color:var(--gray);margin-top:8px}
+  .growth .g-new{background:linear-gradient(135deg,#fdeaea,#fff4f4);border-color:#f6cfd0}
+  .growth .g-new .big{font-size:34px;font-weight:800;color:var(--red);line-height:1}
+  .growth .g-new .big small{font-size:16px}
+  .growth .g-share{background:linear-gradient(135deg,var(--blue-light),#f4f8ff);border-color:#cfe0fb}
+  .growth .g-share .big{font-size:30px;font-weight:800;color:var(--blue-dark);line-height:1}
+  .growth .g-share .big .dn{font-size:16px;color:var(--red);font-weight:700}
+  .newcomers{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px}
+  .newcomers .nc{font-size:12px;padding:4px 10px;border-radius:20px;background:#fdeaea;color:var(--red);font-weight:600;border:1px solid #f6cfd0}
+  .newcomers .nc.lead{background:var(--red);color:#fff}
+  .legend-inline{display:flex;gap:16px;font-size:12px;color:var(--gray);margin-top:8px;justify-content:center}
+  .legend-inline span{display:flex;align-items:center;gap:5px}
+  .legend-inline i{width:11px;height:11px;border-radius:3px;display:inline-block}
+  /* 模块3：如翼复盘 */
+  .part-banner{display:flex;align-items:center;gap:12px;margin:34px 0 18px;padding:14px 20px;border-radius:12px;
+    background:linear-gradient(90deg,var(--blue-dark),var(--blue));color:#fff}
+  .part-banner .pb-tag{background:rgba(255,255,255,.2);padding:3px 10px;border-radius:12px;font-size:12px;font-weight:700;letter-spacing:1px}
+  .part-banner .pb-t{font-size:18px;font-weight:800}
+  .part-banner .pb-d{font-size:13px;opacity:.85;margin-left:auto}
+  .part-banner.b2{background:linear-gradient(90deg,#5a3fd6,var(--purple))}
+  .sub-title{font-size:16px;font-weight:800;color:var(--blue-dark);margin:6px 0 14px;display:flex;align-items:center;gap:8px}
+  .sub-title .sn{background:var(--blue-light);color:var(--blue);font-size:12px;padding:2px 9px;border-radius:10px}
+
+  .chain{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:6px 0 4px}
+  .chain .step{flex:1;min-width:130px;background:#fff6f6;border:1px solid #f6d3d4;border-radius:12px;padding:12px 12px;text-align:center;position:relative}
+  .chain .step .sv{font-size:22px;font-weight:800;color:var(--red);line-height:1.2}
+  .chain .step .sl{font-size:12px;color:var(--gray);margin-top:4px;line-height:1.45}
+  .chain .step.s0{background:#f0f5ff;border-color:#cfe0fb}.chain .step.s0 .sv{color:var(--blue-dark)}
+  .chain .arrow{display:flex;align-items:center;padding:0 5px;color:var(--red);font-weight:800;font-size:18px}
+
+  .ranks{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+  .rk{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fafbfe}
+  .rk .rn{font-size:20px;font-weight:800;color:var(--blue-dark)}
+  .rk .rn small{font-size:12px;font-weight:700;margin-left:4px}
+  .rk .rn .u{color:var(--green)} .rk .rn .d{color:var(--red)}
+  .rk .rl{font-size:12px;color:var(--gray)}
+  .rk.bad{background:#fff6f6;border-color:#f6d3d4}.rk.bad .rn{color:var(--red)}
+  .rk.good{background:#effaf5;border-color:#c9ecdc}.rk.good .rn{color:var(--green)}
+
+  .funnel{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+  .fn-row{display:flex;align-items:center;gap:12px}
+  .fn-name{width:120px;font-size:13px;font-weight:700;color:var(--ink);flex-shrink:0}
+  .fn-bar{height:40px;border-radius:8px;display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:700;font-size:13px;white-space:nowrap}
+  .fn-cmp{font-size:12px;color:var(--gray);white-space:nowrap}
+  .fn-cmp b{color:var(--red)} .fn-cmp b.g{color:var(--green)}
+
+  .wc{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:8px}
+  .wc span{padding:4px 12px;border-radius:16px;background:var(--blue-light);color:var(--blue-dark);font-weight:600}
+  .wc .w1{font-size:20px}.wc .w2{font-size:16px}.wc .w3{font-size:14px}.wc .w4{font-size:12px;background:#f0f3f9;color:var(--gray)}
+
+  .mini-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:4px 0 14px}
+  .mk{border-radius:10px;padding:12px 14px;border:1px solid var(--line);background:#fafbfe}
+  .mk .mv{font-size:22px;font-weight:800;color:var(--blue-dark);line-height:1.15}
+  .mk .mv small{font-size:13px;color:var(--gray);font-weight:600}
+  .mk .ml{font-size:12px;color:var(--gray);margin-top:3px}
+  .mk.r{background:#fff6f6;border-color:#f6d3d4}.mk.r .mv{color:var(--red)}
+  .mk.g{background:#effaf5;border-color:#c9ecdc}.mk.g .mv{color:var(--green)}
+
+  .contrast{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+  .contrast .cb{flex:1;text-align:center;border-radius:12px;padding:14px 10px}
+  .contrast .cb .cv{font-size:28px;font-weight:800;line-height:1.1}
+  .contrast .cb .cl{font-size:12px;color:var(--gray);margin-top:4px}
+  .contrast .c-hi{background:#effaf5;border:1px solid #c9ecdc}.contrast .c-hi .cv{color:var(--green)}
+  .contrast .c-lo{background:#fff6f6;border:1px solid #f6d3d4}.contrast .c-lo .cv{color:var(--red)}
+  .contrast .vs{font-weight:800;color:var(--gray)}
+
+  /* 三层补R3 */
+  .layer{border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:22px;background:#fff;box-shadow:0 2px 14px rgba(20,40,90,.04)}
+  .layer .lh{display:flex;align-items:center;gap:14px;padding:16px 24px;color:#fff}
+  .layer .lh .ln{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:17px}
+  .layer .lh .lt{font-size:18px;font-weight:800}
+  .layer .lh .ld{font-size:13px;opacity:.9;margin-left:auto}
+  .layer .lb{padding:20px 24px}
+  .l1 .lh{background:linear-gradient(90deg,#5a3fd6,var(--purple))}
+  .l2 .lh{background:linear-gradient(90deg,var(--blue-dark),var(--blue))}
+  .l3 .lh{background:linear-gradient(90deg,#b86e00,var(--amber))}
+  .lever{border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;background:#fcfdff}
+  .lever .lv-h{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+  .lever .lv-h b{font-size:15px}
+  .lever p{font-size:13.5px;color:var(--ink);margin:3px 0}
+  .lever p .k{color:var(--gray);font-weight:600}
+  .pill{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:700}
+  .p-free{background:#e3f6ee;color:var(--green)} .p-cost{background:#fff4e0;color:#b4740a}
+  .p-now{background:var(--blue-light);color:var(--blue)} .p-long{background:#f0f3f9;color:var(--gray)}
+  .p-new{background:var(--red);color:#fff} .p-tbd{background:#f3eefe;color:var(--purple)}
+  .pool{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:10px 0 4px}
+  .pool .pc{border-radius:12px;padding:12px 16px;text-align:center;min-width:130px}
+  .pool .pc .pv{font-size:24px;font-weight:800;line-height:1.1}
+  .pool .pc .pl{font-size:12px;color:var(--gray);margin-top:3px}
+  .pool .pa{font-size:13px;color:var(--gray);font-weight:700;text-align:center}
+  @media(max-width:860px){.ranks,.mini-kpis{grid-template-columns:1fr 1fr}.chain .arrow{display:none}}
+  /* 大盘截图 */
+  .shot{display:block;width:100%;border-radius:12px;border:1px solid var(--line);background:#1a1f33;margin:4px 0 6px}
+  .shot-cap{font-size:12px;color:var(--gray);text-align:center;margin-bottom:12px}
+  .concl{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(90deg,#fff4e0,#fffaf0);border:1px solid #f6dfb0;
+    border-left:5px solid var(--amber);border-radius:12px;padding:14px 18px;margin-top:14px}
+  .concl .cn{background:var(--amber);color:#fff;font-weight:800;font-size:13px;padding:3px 10px;border-radius:10px;white-space:nowrap;margin-top:2px}
+  .concl .ct{font-size:15.5px;font-weight:700;color:#7a4a00;line-height:1.6}
+  .facts{list-style:none;margin:2px 0 14px}
+  .facts li{position:relative;padding:6px 0 6px 18px;font-size:14.5px}
+  .facts li::before{content:"";position:absolute;left:2px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--blue)}
+  .shift{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 14px}
+  .shift .sf{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:#fafbfe}
+  .shift .sf .sn2{font-size:13px;color:var(--gray);font-weight:700}
+  .shift .sf .sv2{font-size:24px;font-weight:800;margin-top:4px;color:var(--ink)}
+  .shift .sf .sv2 .ar{font-size:18px;margin:0 6px;color:var(--gray)}
+  .shift .sf.up{background:#effaf5;border-color:#c9ecdc}.shift .sf.up .sv2 b{color:var(--green)}
+  .shift .sf.dn{background:#fff6f6;border-color:#f6d3d4}.shift .sf.dn .sv2 b{color:var(--red)}
+  .shift .sf .sx{font-size:12px;color:var(--gray);margin-top:4px}
+  .m1-div{display:flex;align-items:center;gap:10px;margin:30px 0 16px;font-size:15px;font-weight:800;color:var(--blue-dark)}
+  .m1-div::after{content:"";flex:1;height:1px;background:var(--line)}
+  @media(max-width:860px){.shift{grid-template-columns:1fr}}
+  /* 双十一政策 */
+  .policy-wrap{margin-top:16px}
+  .pol{border:1px solid #fbd5b5;background:#fffaf5;border-radius:12px;padding:16px 18px;margin-bottom:14px}
+  .pol-h{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:16px}
+  .pol-n{background:#f76707;color:#fff;font-size:12px;font-weight:800;padding:3px 10px;border-radius:10px}
+  .pol p{font-size:14px;margin:5px 0;line-height:1.65}
+  .pol p .k{color:#9a3412;font-weight:700}
+  .pol a{color:var(--blue);word-break:break-all;font-size:13px}
+  .pol-warn{margin-top:10px;background:#fff1f0;border:1px solid #f6c8c4;border-radius:8px;padding:10px 12px;font-size:13.5px;color:#a8071a}
+  .policy-img img{width:100%;border-radius:10px;border:1px solid var(--line);display:block}
+  @media(max-width:860px){.policy-wrap{grid-template-columns:1fr}}
+  /* 嵌入分析页 */
+  .embed-box{border:2px solid var(--purple);border-radius:14px;overflow:hidden;margin:4px 0 18px;background:#f5f7fa}
+  .embed-h{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:linear-gradient(90deg,#5a3fd6,var(--purple));color:#fff;flex-wrap:wrap}
+  .embed-h b{font-size:15px;margin-right:10px}
+  .embed-h span{font-size:12px;opacity:.85}
+  .embed-open{color:#fff;font-size:13px;font-weight:700;text-decoration:none;background:rgba(255,255,255,.2);padding:5px 12px;border-radius:16px;white-space:nowrap}
+  .embed-open:hover{background:rgba(255,255,255,.32)}
+  .embed-frame{display:block;width:100%;height:900px;border:0;background:#f5f7fa}
+  footer{text-align:center;padding:40px 20px 60px;color:var(--gray);font-size:13px}
+  .disc{max-width:1080px;margin:20px auto 0;font-size:12px;color:#9aa4b5;border-top:1px solid var(--line);padding-top:16px}
+  @media(max-width:860px){.kpis,.three,.grid2,.fix{grid-template-columns:1fr}.cover h1{font-size:30px}}
+</style>
+</head>
+<body>
+
+<!-- 封面 -->
+<header class="cover">
+  <div class="wrap">
+    <h1>华大营养 2026 Q3 复盘<br>与双十一策略报告</h1>
+    <p class="sub">腾讯营销膳食营养团队</p>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#m1">① 行业大盘</a>
+  <a href="#m2">② 华大Q3生意</a>
+  <a href="#m3">③ 如翼复盘·三层补R3</a>
+  <a href="#m4">④ Q4建议·双十一TODO</a>
+</div></nav>
+
+<!-- 模块1 -->
+<section id="m1"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">1</div><h2>行业大盘 Q3</h2></div>
+  <p class="sec-desc">给华大一个对标参考系，让"哪强哪弱"有坐标</p>
+
+  <!-- 1.1 视频号膳食保健大盘 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">1.1</span>视频号膳食保健大盘：7 月底快速爬升，广告 GMV 占比回落</div>
+    <ul class="facts">
+      <li>Q3 随着 618 结束，整个膳食保健赛道在 <b>7 月底快速爬升</b>；其中<b>膳食占整体超 85%</b>，单周已稳定在 <b>1.2 亿</b>规模。</li>
+      <li>从大盘付费角度看，<b>广告 GMV 占比整体平稳下调至约 25%</b>：春节后达播、短视频带货在膳食品类逐步放开，经营从单一自播走向多元化。</li>
+      <li>对照组：尚未放开带货的<b>保健品赛道</b>，广告投放（直购 + 直播）依旧是主导，且占比持续上涨。</li>
+    </ul>
+    <img class="shot" src="assets/m1-01.png" alt="周度GMV与广告GMV占比">
+    <div class="shot-cap">周度 GMV（柱：膳食 / 保健）与广告 GMV 占比（线：保健 / 膳食），2025-12-29 起</div>
+    <div class="concl"><span class="cn">结论 1</span><div class="ct">后续增长，分销部分无法忽略。</div></div>
+  </div>
+
+  <!-- 1.2 头部30品牌 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">1.2</span>30 家头部膳食保健品牌 YTD：头部效应显著，短视频增长最快</div>
+    <ul class="facts">
+      <li><b>头部效应显著</b>：TOP30 品牌贡献占比 <b>70% 以上</b>。</li>
+      <li>2026 年初至 9 月，场景结构发生明显迁移：</li>
+    </ul>
+    <div class="shift">
+      <div class="sf dn"><div class="sn2">直播</div><div class="sv2">65%<span class="ar">→</span><b>37%</b></div><div class="sx">占比大幅下降</div></div>
+      <div class="sf up"><div class="sn2">短视频</div><div class="sv2">17%<span class="ar">→</span><b>47%</b></div><div class="sx">周 GMV 9 月 vs 1 月提升 <b style="color:var(--green)">14 倍</b></div></div>
+      <div class="sf"><div class="sn2">直购</div><div class="sv2">18%<span class="ar">→</span>15%</div><div class="sx">小幅回落</div></div>
+    </div>
+    <img class="shot" src="assets/m1-02.png" alt="TOP30品牌周GMV与订单量">
+    <div class="shot-cap">TOP30 品牌周总 GMV 与订单量（01/05 → 09/13，36 周）</div>
+    <img class="shot" src="assets/m1-03.png" alt="场景GMV占比与广告结构">
+    <div class="shot-cap">左：场景 GMV 占比（窗口累计）　右：广告结构（广告 GMV 及占比，周维度）</div>
+    <div class="concl"><span class="cn">结论 2</span><div class="ct">短视频带货在膳食类目增长最为明显。</div></div>
+  </div>
+
+  <!-- 1.3 Top品牌排名 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">1.3</span>膳食保健 Top 品牌 GMV 排名：两级断层，华大客单价第一</div>
+    <ul class="facts">
+      <li>榜单中两条红线：<b>红线 1 = 十亿级俱乐部</b>，<b>红线 2 = 亿级俱乐部</b>。TOP1 断层第一，前 4 品牌与后面品牌也形成断层。</li>
+      <li>头部商家对比：<b>华大的小店客单价排名第一</b>。</li>
+      <li>营销结构上，几个头部品牌都聚焦<b>直播板块争夺</b>，而诺特兰德在<b>短视频一家独大</b>。</li>
+    </ul>
+    <img class="shot" src="assets/m1-04.png" alt="膳食保健Top品牌GMV排名">
+    <div class="shot-cap">品牌榜单（保健食品 / 膳食营养补充食品类目，01/05 → 09/13）</div>
+    <img class="shot" src="assets/m1-05.png" alt="头部商家对比">
+    <div class="shot-cap">头部商家对比：GMV、广告 GMV 占比、直播 / 短视频 / 其他结构、客单价</div>
+    <div class="concl"><span class="cn">结论 3</span><div class="ct">随着益生菌放宽带货，谁在分销和达人领域率先跑出，对接下来的增长非常关键：一方面降低费比、提升利润空间；另一方面不局限于直播场景，实现全微信用户的破圈触达。</div></div>
+  </div>
+
+  <div class="m1-div">1.4 广告投放大盘（竞价消耗口径）</div>
+
+  <div class="kpis" style="grid-template-columns:repeat(2,1fr)">
+    <div class="kpi flat"><div class="v">+0.6%</div><div class="l">膳食赛道Q3总消耗环比</div><div class="trend" style="color:var(--gray)">基本持平</div></div>
+    <div class="kpi down"><div class="v">-20.6%</div><div class="l">益生菌类目消耗环比</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3><span class="dot"></span>Q3 赛道品类消耗结构</h3><p class="note">菌/菇/酵素（含益生菌）以 26.6% 稳居第一</p>
+      <div class="chart-box sm"><canvas id="cIndPie"></canvas></div></div>
+    <div class="card"><h3><span class="dot"></span>Top 品类月度趋势</h3>
+      <div class="chart-box sm"><canvas id="cIndTrend"></canvas></div></div>
+  </div>
+
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--red)"></span>益生菌类目竞争格局：华大第一，但份额在失守</h3>
+    <p class="note">Q3 益生菌类目消耗环比 -20.6%；玩家在涌入，华大份额被稀释</p>
+
+    <div class="growth">
+      <div class="g-box">
+        <div class="g-flow">
+          <span class="num">27</span><span class="arr">→</span><span class="num to">32</span><span class="g-unit">家</span>
+        </div>
+        <div class="g-label">益生菌类目活跃客户数（Q2 → Q3，<b style="color:var(--green)">净增 5 家</b>）</div>
+      </div>
+      <div class="g-box g-new">
+        <div class="big">11<small> 家</small></div>
+        <div class="g-label">Q3 <b style="color:var(--red)">全新进入</b>的品牌，其中呜咔实验室直冲第 4</div>
+      </div>
+      <div class="g-box g-share">
+        <div class="big">47.6% <span class="dn">↓5.3pp</span></div>
+        <div class="g-label">华大市场份额（Q2 53.0% → Q3 47.6%），仍居第一但被稀释</div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:4px">
+      <div>
+        <div class="chart-box sm"><canvas id="cProbio"></canvas></div>
+        <div class="legend-inline">
+          <span><i style="background:#1a5ed6"></i>华大（第一）</span>
+          <span><i style="background:#c3cbd9"></i>存量竞品</span>
+          <span><i style="background:#e5484d"></i>Q3 新进入玩家</span>
+        </div>
+      </div>
+      <div>
+        <div class="insight warn"><div class="t">华大份额 53.0% → 47.6%（-5.3pp）</div>华大仍稳居第一，但消耗环比 -28.6%，蛋糕被新涌入的玩家分走。</div>
+        <div class="insight warn"><div class="t">新玩家凶猛（11 家新进入）</div><b>呜咔实验室</b>从 0 直接冲到第 4；<b>诺特兰德</b>+123%；<b>汤臣倍健</b>+4119% 加码入场。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot"></span>膳食赛道 Q3 三个环境约束</h3>
+    <div class="grid2" style="margin-top:8px">
+      <div>
+        <div class="insight"><div class="t">① 存量竞争，赛道消耗持平</div>赛道总消耗环比仅 +0.6%，盘子不增长；但<b>益生菌类目 -20.6% 且新进入 11 家</b>——存量里还在挤入新玩家，竞争只会更激烈。</div>
+        <div class="insight warn"><div class="t">② 官方货补、超品日受限</div>膳食行业非 K800，官方货补以及超品日均受限。</div>
+      </div>
+      <div>
+        <div class="insight"><div class="t">③ 内容化成为头部共识</div>竞品均值 R3 占比 17.42%、种草率 17.78%，均显著高于华大——头部品牌已把预算结构从"纯效果"转向"内容种草+品牌收口"。</div>
+        <div class="quote" style="font-size:15px;background:#fff3b0;border-left-color:#f5c400">收口：赛道 GMV 在增长，但<b>大盘 GMV 结构变化很大</b>——直播增速不及短视频，而赛道的商业化投放增长平稳。这意味着赛道商业化本身的策略接下来也会调整，<b>对华大的提示也一样：增长不能只靠直播 + 投放，要跟上内容化与分销化的结构变化</b>。</div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- 模块2 -->
+<section id="m2"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">2</div><h2>华大 Q3 整体生意</h2></div>
+
+  <div class="kpis" style="grid-template-columns:repeat(3,1fr)">
+    <div class="kpi flat"><div class="v">7,710<small>万</small></div><div class="l">Q3 总 GMV（店播 + 直购 + 达播）</div></div>
+    <div class="kpi flat"><div class="v">6,295<small>万</small></div><div class="l">Q3 总 GSV（退后）</div><div class="trend" style="color:var(--gray)">整体退款率 18.4%</div></div>
+    <div class="kpi flat"><div class="v">1,130<small>万</small></div><div class="l">达播 GMV（占总 GMV 14.7%）</div><div class="trend" style="color:var(--gray)">GSV 788 万</div></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot"></span>Q3 链路结构</h3><p class="note">店播是绝对主力；达播已占总 GMV 的 14.7%，但退款率是店播的近 2 倍</p>
+    <table>
+      <tr><th>链路</th><th class="num">GMV</th><th class="num">GSV（退后）</th><th class="num">GMV 占比</th><th class="num">GSV 占比</th><th class="num">退款率</th></tr>
+      <tr><td>店播（直播）</td><td class="num">5,841.18万</td><td class="num">4,860.78万</td><td class="num">75.8%</td><td class="num">77.2%</td><td class="num">16.8%</td></tr>
+      <tr><td>达播</td><td class="num">1,129.58万</td><td class="num">787.54万</td><td class="num">14.7%</td><td class="num">12.5%</td><td class="num"><b style="color:var(--red)">30.3%</b></td></tr>
+      <tr><td>直购</td><td class="num">739.07万</td><td class="num">646.69万</td><td class="num">9.6%</td><td class="num">10.3%</td><td class="num">12.5%</td></tr>
+      <tr><td><b>合计</b></td><td class="num"><b>7,709.84万</b></td><td class="num"><b>6,295.00万</b></td><td class="num">100%</td><td class="num">100%</td><td class="num">18.4%</td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot" style="background:var(--red)"></span>Q3 vs Q2：总盘环比下滑约 12%，结构在升级</h3>
+    <p class="note">Q2 未启动达人合作；GSV 为退后口径</p>
+    <div class="mini-kpis">
+      <div class="mk r"><div class="mv">-11.7%</div><div class="ml">总 GSV：7,130.9万 → 6,295.0万（-835.9万）</div></div>
+      <div class="mk r"><div class="mv">-24.2%</div><div class="ml">直播店 GSV：6,412.5万 → 4,860.8万（-1,551.7万）</div></div>
+      <div class="mk g"><div class="mv">+787.5<small>万</small></div><div class="ml">达播 GSV：从 0 到 787.5万（新增）</div></div>
+    </div>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="cQoQ"></canvas></div></div>
+      <div>
+        <table>
+          <tr><th>链路</th><th class="num">Q2 GSV</th><th class="num">Q3 GSV</th><th class="num">变化</th></tr>
+          <tr><td>直播店</td><td class="num">6,412.5万</td><td class="num">4,860.8万</td><td class="num"><b style="color:var(--red)">-24.2%</b></td></tr>
+          <tr><td>直购</td><td class="num">718.4万</td><td class="num">646.7万</td><td class="num" style="color:var(--red)">-10.0%</td></tr>
+          <tr><td>达播</td><td class="num">—</td><td class="num">787.5万</td><td class="num"><b style="color:var(--green)">新增</b></td></tr>
+          <tr><td><b>合计 GSV</b></td><td class="num"><b>7,130.9万</b></td><td class="num"><b>6,295.0万</b></td><td class="num"><b style="color:var(--red)">-11.7%</b></td></tr>
+          <tr><td>合计 GMV</td><td class="num">8,579.1万</td><td class="num">7,709.8万</td><td class="num" style="color:var(--red)">-10.1%</td></tr>
+          <tr><td>GSV 结构</td><td class="num" style="font-size:12px">直播店 89.9%<br>直购 10.1%</td><td class="num" style="font-size:12px">直播店 77.2%<br>直购 10.3% · 达播 12.5%</td><td class="num">三条腿</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="insight warn" style="margin-top:16px"><div class="t">结论 1：总盘环比下滑，缺口集中在直播店</div>直播店 GSV 减少 1,552 万，占全部下滑的 93%；主要来自<b>肠道（益畅）主动缩量</b>——益畅直播日均消耗从 14.9 万降至 7.6 万（-49%），益畅 ROI 领先其他品类，是在缩量状态下取得的。</div>
+    <div class="insight good"><div class="t">结论 2：达播是唯一的新增量</div>达播从 0 做到 787.5 万 GSV，弥补了自营链路（直播店 + 直购）下滑的约一半；GSV 结构从"直播店一家独大（89.9%）"变为<b>三条腿走路</b>，与大盘"分销与达人不可忽略"的趋势一致。</div>
+    <div class="insight"><div class="t">结论 3：品类内部有增长，但未能抵消益畅收缩</div>体重（镜脂）直播日均消耗 <b>+87%</b>、睡眠（益休）<b>+34%</b>，骨骼（益力）为 Q3 新上线品类；但三者增量不足以对冲肠道（益畅）的下滑。</div>
+    <div class="insight good"><div class="t">结论 4：Q3 逐月回升，出季度势头向上</div>月度投放消耗 7 月 700 万 → 8 月 1,073 万 → 9 月 1,181 万，9 月已高于 Q2 月均（约 1,094 万）；Q3 整体偏低主要受 7 月起步拖累。<span style="color:var(--gray);font-size:12px">（按月度投放消耗口径）</span></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card"><h3><span class="dot"></span>品类 GMV 结构</h3><p class="note">镜脂、益畅双主力占近 7 成</p>
+      <div class="chart-box sm"><canvas id="cPie"></canvas></div></div>
+    <div class="card"><h3><span class="dot"></span>品类 ROI 对比</h3><p class="note">肠道益生菌（益畅）ROI 高于其他品类整体约 45%</p>
+      <div class="chart-box sm"><canvas id="cRoi"></canvas></div></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot"></span>品类明细与 ROI 变化（vs H1）</h3>
+    <table>
+      <tr><th>品类</th><th class="num">GMV</th><th class="num">占比</th><th>ROI 变化（vs H1）</th><th>判断</th></tr>
+      <tr><td>镜脂</td><td class="num">1,935.85万</td><td class="num">34.9%</td><td><span class="badge b-down">-7.5%</span></td><td>消耗担当，量价双降 ⚠️</td></tr>
+      <tr><td>益畅</td><td class="num">1,858.64万</td><td class="num">33.5%</td><td><span class="badge b-up">+46.0%</span></td><td>缩量75%后精投，ROI亮点 ⭐</td></tr>
+      <tr><td>益休（睡眠）</td><td class="num">975.01万</td><td class="num">17.6%</td><td><span class="badge b-up">+5.2%</span></td><td>心智最强，被低估 ⭐</td></tr>
+      <tr><td>直购</td><td class="num">680.35万</td><td class="num">12.3%</td><td><span class="badge b-down">-8.9%</span></td><td>小店链路效率需审视 ⚠️</td></tr>
+      <tr><td>益力（骨骼）</td><td class="num">92.61万</td><td class="num">1.7%</td><td><span class="badge b-flat">Q3 新品</span></td><td>开播一周即起量 ⭐</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="border:2px solid var(--green)">
+    <h3><span class="dot" style="background:var(--green)"></span>骨骼益生菌（益力）新品：开播一周即起量</h3>
+    <p class="note">Q3 新上线品类，直播链路（华大营养益生菌研究中心）；9/19 开播，数据截至 10/7</p>
+    <div class="mini-kpis" style="grid-template-columns:repeat(4,1fr)">
+      <div class="mk g"><div class="mv">第 6 天</div><div class="ml">9/24 单日有效成交 18.75 万，开播一周内起量</div></div>
+      <div class="mk g"><div class="mv">12.3<small>万/日</small></div><div class="ml">起量后日均有效成交（9/24–10/7），国庆期间保持稳定</div></div>
+      <div class="mk g"><div class="mv">178.4<small>万</small></div><div class="ml">开播 19 天累计有效成交，消耗 104.3 万</div></div>
+      <div class="mk g"><div class="mv" style="font-size:19px">2.20% / 3.04%</div><div class="ml">直播 CTR / CVR，均为四个品类中最高</div></div>
+    </div>
+    <div class="chart-box" style="height:300px;margin-bottom:16px"><canvas id="cBone"></canvas></div>
+    <div class="chain" style="margin-top:4px">
+      <div class="step s0"><div class="sv" style="font-size:16px">视频号主页内容</div><div class="sl">开播前<br>完成内容发布</div></div>
+      <div class="arrow" style="color:var(--green)">＋</div>
+      <div class="step s0"><div class="sv" style="font-size:16px">专业博士 IP</div><div class="sl">打造专业<br>信任背书</div></div>
+      <div class="arrow" style="color:var(--green)">＋</div>
+      <div class="step s0"><div class="sv" style="font-size:16px">前期素材准备</div><div class="sl">投放素材<br>提前就位</div></div>
+      <div class="arrow" style="color:var(--green)">→</div>
+      <div class="step" style="background:#effaf5;border-color:#c9ecdc"><div class="sv" style="font-size:16px;color:var(--green)">开播一周起量</div><div class="sl">点击率、转化率<br>均为直播链路最高</div></div>
+    </div>
+    <div class="insight good" style="margin-top:16px"><div class="t">起量原因：把"种草"做在了开播之前</div>开播前就完成了视频号主页内容发布、专业博士 IP 打造和前期素材准备，用户在进直播间之前已经建立了专业认知，所以新品冷启动周期大幅缩短。<b>这正是"先内容种草、再效果收割"的打法在新品上的成功验证</b>，可作为双十一新品和主推品的标准动作复用。</div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot"></span>达播月度趋势（Q3 共 67 场）</h3><p class="note">9月场均 GMV 冲到 25.3 万，主要靠营养专家张晔单场拉动</p>
+    <div class="chart-box"><canvas id="cDbTrend"></canvas></div>
+  </div>
+
+  <div class="card">
+    <h3><span class="dot"></span>达播分品类 GMV（Q3 共 67 场 · 1,129.6 万）</h3>
+    <p class="note">按产品功能细分；"出现场次"为该品类在 67 场达播中被带货的场次数</p>
+    <div class="grid2">
+      <div><div class="chart-box" style="height:340px"><canvas id="cDbCat"></canvas></div></div>
+      <div>
+        <table>
+          <tr><th>品类</th><th>代表产品</th><th class="num">GMV</th><th class="num">占比</th><th class="num">场次</th></tr>
+          <tr><td>护理肠道</td><td>益畅、畅青、蔬畅</td><td class="num">399.4万</td><td class="num"><b>35.4%</b></td><td class="num">60</td></tr>
+          <tr><td>护理胃</td><td>益舒</td><td class="num">192.4万</td><td class="num">17.0%</td><td class="num">54</td></tr>
+          <tr><td>减脂</td><td>镜脂·轻、代餐奶昔</td><td class="num">184.2万</td><td class="num">16.3%</td><td class="num">27</td></tr>
+          <tr><td>改善睡眠</td><td>益休</td><td class="num">120.3万</td><td class="num">10.7%</td><td class="num">40</td></tr>
+          <tr><td>益生元</td><td>晚安饮、早安饮</td><td class="num">81.3万</td><td class="num">7.2%</td><td class="num">19</td></tr>
+          <tr><td>其他 6 类</td><td style="font-size:12px">护肝 / 维生素 / 口腔 / 私护 / 免疫 / 降酸</td><td class="num">152.2万</td><td class="num">13.5%</td><td class="num">—</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="insight good" style="margin-top:16px"><div class="t">达播承接了肠道品类</div>护理肠道（益畅等）是达播第一大品类，占 35.4%，67 场里有 60 场带货。直播店的益畅主动缩量后，<b>肠道品类的一部分成交转到了达播渠道</b>。</div>
+    <div class="insight warn"><div class="t">双十一组货可以再向主推品倾斜</div>减脂（16.3%）、睡眠（10.7%）合计只占达播的 27%，减脂只在 27 场里出现。双十一主推的是益休 + 镜脂轻，建议在达播组货中提高这两个品的权重和出场频次。</div>
+  </div>
+
+</div></section>
+
+<!-- 模块3 -->
+<section id="m3"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">3</div><h2>如翼品牌资产复盘 · 三层补 R3</h2></div>
+  <p class="sec-desc">本次核心 · 先用如翼数据把"R3 缺口从哪来"讲透（A），再给出"三层补 R3"打法（B），目标：种草率 3.82% → 行业均值 6.83%</p>
+
+  <!-- 根因链 -->
+  <div class="card">
+    <h3><span class="dot" style="background:var(--red)"></span>一张图看懂华大 Q3 的核心矛盾：持续提升内容供给是当务之急</h3>
+    <p class="note">R3 缺口、流转断档、品牌盘塌陷、跨店失血——四个现象，同一个根因：种草内容与品牌收口投入长期不足</p>
+    <div class="chain">
+      <div class="step s0"><div class="sv">94%</div><div class="sl">种草人群由<br>效果竞价贡献</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sv">88.1%</div><div class="sl">R1+R2 顶部淤积<br>（竞品 80.6%）</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sv">3.82%</div><div class="sl">种草率<br>仅竞品 1/5</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sv">0</div><div class="sl">品牌词搜索<br>阵地占比 &lt;0.1%</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sv">21.5万</div><div class="sl">被竞品<br>抢先种草</div></div>
+      <div class="arrow">→</div>
+      <div class="step"><div class="sv">2.4万</div><div class="sl">成交<br>净流出</div></div>
+    </div>
+    <div class="insight good" style="margin-top:16px"><div class="t">但华大不是没有种草能力</div>视频号效果竞价种草 <b>TGI 200</b>、BGINutri 店 R3 占比 <b>超类目 TOP5</b>、益生菌子类目种草场景共鸣 <b>TGI 147.7（行业最高档）</b>——"内容场 × 专业心智"是被验证过的强项，只是没有被规模化配置。</div>
+  </div>
+
+  <!-- ===== PART A ===== -->
+  <div class="part-banner"><span class="pb-tag">PART A</span><span class="pb-t">如翼品牌资产复盘</span><span class="pb-d">数据：如翼营销官 · 2026-10-07</span></div>
+
+  <!-- A1 5R体检 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A1</span>品牌人群资产体检：不缺"看见的人"，缺"共鸣的人"</div>
+    <div class="mini-kpis">
+      <div class="mk"><div class="mv">1,132<small>万</small></div><div class="ml">华大 5R 总资产（竞品均值 4,205万，约 1/3.7）</div></div>
+      <div class="mk r"><div class="mv">10.18%</div><div class="ml">R3 共鸣占比：落后竞品 7.2pp / 行业 3.0pp / TOP5 10.5pp</div></div>
+      <div class="mk g"><div class="mv">0.52%</div><div class="ml">R5 信赖占比：高于竞品均值，老客心智扎实</div></div>
+    </div>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="c5r"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cTrend6"></canvas></div></div>
+    </div>
+    <div class="insight warn" style="margin-top:16px"><div class="t">趋势：R3 从 4 月 14.19% 一路滑到 8 月 8.93%，9 月靠互选放量回升</div>互选观看 7月3万 → 8月73万 → 9月159万，R3 单日占比从 9/7 低点 7.39% 回到 10/7 的 10.18%；<b>但 R3 流入率行业排名反跌到第 41（-8 名）</b>——种草"量"在恢复，"效率"仍在下滑。</div>
+    <div class="ranks">
+      <div class="rk good"><div class="rn">第5<small class="u">名</small></div><div class="rl">R4R5 人群数（21.0万）</div></div>
+      <div class="rk"><div class="rn">第17<small class="u">↑2</small></div><div class="rl">R3 人群数（214万）</div></div>
+      <div class="rk"><div class="rn">第22<small class="u">↑1</small></div><div class="rl">5R 人群数（2,293万）</div></div>
+      <div class="rk bad"><div class="rn">第41<small class="d">↓8</small></div><div class="rl">R3 流入率（4.69%）</div></div>
+    </div>
+  </div>
+
+  <!-- A2 资产流转 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A2</span>品牌资产流转：拉新—蓄水强，种草—转化弱</div>
+    <p class="note">近 30 天（9/6 → 10/6）桑基流转；条形宽度为示意</p>
+    <div class="funnel">
+      <div class="fn-row"><div class="fn-name">拉新 非5R→5R</div><div class="fn-bar" style="width:62%;background:var(--blue)">726.2 万人</div><div class="fn-cmp">为竞品均值 <b>34.8%</b></div></div>
+      <div class="fn-row"><div class="fn-name">蓄水 →R1/R2</div><div class="fn-bar" style="width:58%;background:#4a86e8">683.1 万 · 率 94.07%</div><div class="fn-cmp">竞品 79.54%，<b class="g">+14.5pp</b></div></div>
+      <div class="fn-row"><div class="fn-name">种草 →R3</div><div class="fn-bar" style="width:16%;background:var(--red)">81.8 万 · 3.82%</div><div class="fn-cmp">竞品 17.78%，<b>-14.0pp</b></div></div>
+      <div class="fn-row"><div class="fn-name">转化 R3→R4</div><div class="fn-bar" style="width:7%;background:#b3261e">5,939</div><div class="fn-cmp">R4→R5 仅 3,245 人</div></div>
+    </div>
+    <div class="grid2" style="margin-top:20px">
+      <div><div class="chart-box sm"><canvas id="cSeed"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cFlow"></canvas></div></div>
+    </div>
+    <div class="insight" style="margin-top:16px"><div class="t">为什么说种草率是总源头</div>拉进来的 7 成以上人群<b>原地停在 R1/R2</b>，同期 R1→非5R 回落 777.7 万、R2→非5R 回落 315.7 万；9 月花费环比 +11.6%，R3 流入率反而 -0.51pp。诊断测算：种草率从 3.82% 拉到行业均值 6.83%，<b>R3 增量即可接近翻倍</b>——这是双十一最确定的增量空间。</div>
+    <div class="insight warn"><div class="t">大促验证：种草效率不升反降</div>R3 流入率 6月(618) 5.12% → 8月 5.20% → 9月 4.69%。沿用现有投放结构，双十一大概率是"更多 R1/R2 淤积 + 更高收割成本"。</div>
+  </div>
+
+  <!-- A3 触点结构 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A3</span>触点结构：效果竞价一枝独秀，品牌盘有极大增长空间</div>
+    <p class="note">202609 曝光 UV 1,243万（-13.0%）、花费 1,201.6万（+11.6%）、投放触点 13 个；TGI＞100 代表人群匹配度高于平均</p>
+    <div class="chart-box"><canvas id="cTouch"></canvas></div>
+    <div class="grid2" style="margin-top:20px">
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:6px">内容资产：仅为竞品均值的 3.8% ~ 42.7%</div>
+        <div class="chart-box sm" style="height:230px"><canvas id="cContent"></canvas></div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:6px">近 30 天内容词云：产品词多、心智词少</div>
+        <div class="wc">
+          <span class="w1">益生菌</span><span class="w2">益畅益生菌</span><span class="w3">营养素</span><span class="w2">99健康节</span>
+          <span class="w3">益生菌怎么选</span><span class="w3">肠道健康</span><span class="w2">科研级益生菌</span><span class="w3">精准营养</span><span class="w3">一人一方</span>
+          <span class="w4">睡眠场景 ✗</span><span class="w4">体重场景 ✗</span><span class="w4">情绪场景 ✗</span>
+        </div>
+        <div class="insight warn" style="margin-top:14px"><div class="t">三个硬证据</div>① 品牌词搜索识别 = <b>0</b>（行业第 76）；② 品牌阵地/合约/品牌竞价占比 &lt;0.1%；③ 新发布内容 23 条 vs 竞品 612 条（行业第 40）。</div>
+      </div>
+    </div>
+    <div class="insight good"><div class="t">值得放大的例外</div><b>视频号效果竞价种草 TGI 200</b>、腾讯新闻 TGI 167——效果竞价不是不能补 R3，而是要"种草化"；视频号内容场是华大天然的种草土壤。互选 TGI 仅 28，说明达人与人群/卖点匹配仍需优化。</div>
+  </div>
+
+  <!-- A3+ 内容力下钻：华大 vs 万益蓝 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A3+</span>内容力下钻：华大营养 vs 万益蓝</div>
+    <p class="note">如翼 · 域内传播「品牌传播概览」与「品牌关键词」；两个品牌为同一统计周期，直接对比原始值</p>
+
+    <table>
+      <tr><th>指标</th><th class="num">华大营养</th><th class="num">万益蓝</th><th class="num">华大为万益蓝的</th></tr>
+      <tr><td>曝光触达 · 触达数</td><td class="num">6,899.1万</td><td class="num">2.15亿</td><td class="num">32.2%</td></tr>
+      <tr><td>曝光触达 · 新发布内容数</td><td class="num"><b style="color:var(--red)">23</b></td><td class="num">140</td><td class="num"><b style="color:var(--red)">16.4%</b></td></tr>
+      <tr><td>种草互动 · 品牌搜索数</td><td class="num"><b style="color:var(--red)">0</b></td><td class="num">3,645</td><td class="num"><b style="color:var(--red)">0%</b></td></tr>
+      <tr><td>种草互动 · 互动数</td><td class="num">104,969</td><td class="num">136,432</td><td class="num">76.9%</td></tr>
+      <tr><td>效果转化 · 点击数</td><td class="num">1,210,162</td><td class="num">1,354,642</td><td class="num"><b style="color:var(--green)">89.3%</b></td></tr>
+    </table>
+
+    <div class="grid2" style="margin-top:20px">
+      <div><div class="chart-box sm"><canvas id="cWylCmp"></canvas></div></div>
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px">单条内容效率：华大远高于万益蓝</div>
+        <div class="contrast">
+          <div class="cb c-hi"><div class="cv">4,564</div><div class="cl">华大 · 每条内容带来互动</div></div>
+          <div class="vs">vs</div>
+          <div class="cb" style="background:#f3f5f9;border:1px solid var(--line)"><div class="cv" style="color:var(--gray)">975</div><div class="cl">万益蓝 · 每条内容带来互动</div></div>
+        </div>
+        <div class="contrast">
+          <div class="cb c-hi"><div class="cv">5.26<small style="font-size:14px">万</small></div><div class="cl">华大 · 每条内容带来点击</div></div>
+          <div class="vs">vs</div>
+          <div class="cb" style="background:#f3f5f9;border:1px solid var(--line)"><div class="cv" style="color:var(--gray)">0.97<small style="font-size:14px">万</small></div><div class="cl">万益蓝 · 每条内容带来点击</div></div>
+        </div>
+        <div class="insight good" style="margin:0"><div class="t">内容质量不输，差在供给量</div>华大单条内容的互动是万益蓝的 <b>4.7 倍</b>、点击是 <b>5.4 倍</b>；用 1/6 的内容量做出了近 9 成的点击。<b>问题不在内容好不好，而在内容太少、搜索收口为 0</b>。</div>
+      </div>
+    </div>
+
+    <div style="font-weight:700;font-size:15px;margin:22px 0 10px">品牌关键词：万益蓝"品牌 + 产品系列 + 人群"全覆盖，华大以品牌名和节点词为主</div>
+    <div class="grid2">
+      <div>
+        <table>
+          <tr><th colspan="2">万益蓝 · 关键词内容数 TOP6</th></tr>
+          <tr><td>万益蓝</td><td class="num"><b>184</b></td></tr>
+          <tr><td>益生菌</td><td class="num">61</td></tr>
+          <tr><td>50+</td><td class="num">38</td></tr>
+          <tr><td>膳食纤维</td><td class="num">31</td></tr>
+          <tr><td>益生菌产品</td><td class="num">28</td></tr>
+          <tr><td>中老年人益生菌</td><td class="num">23</td></tr>
+        </table>
+        <div class="wc" style="margin-top:10px"><span class="w3">万益蓝小蓝瓶益生菌</span><span class="w3">万益蓝每日清畅饮</span><span class="w3">Easy100Pro</span><span class="w3">中老年人益生菌</span><span class="w3">膳食纤维冲剂</span><span class="w3">50+</span></div>
+      </div>
+      <div>
+        <table>
+          <tr><th colspan="2">华大营养 · 关键词内容数 TOP6</th></tr>
+          <tr><td>华大营养</td><td class="num"><b>27</b></td></tr>
+          <tr><td>益生菌</td><td class="num">11</td></tr>
+          <tr><td>益畅益生菌</td><td class="num">6</td></tr>
+          <tr><td>营养素</td><td class="num">5</td></tr>
+          <tr><td>99健康节</td><td class="num">4</td></tr>
+          <tr><td>华大益生菌</td><td class="num">4</td></tr>
+        </table>
+        <div class="wc" style="margin-top:10px"><span class="w3">益生菌怎么选</span><span class="w3">科研级益生菌</span><span class="w3">精准营养</span><span class="w3">一人一方</span><span class="w3">AI配方</span><span class="w3">肠道健康</span></div>
+      </div>
+    </div>
+    <div class="insight warn" style="margin-top:16px"><div class="t">三个差距</div>① <b>品牌词声量</b>：华大品牌词内容数 27，仅为万益蓝（184）的 14.7%；② <b>产品系列词</b>：万益蓝有小蓝瓶、每日清畅饮、Easy100Pro 等多个系列词，华大只有"益畅"一个，益休、镜脂轻、益力都没进 TOP；③ <b>人群词</b>：万益蓝直接占住"50+""中老年人益生菌"，与大盘熟龄客群高度对齐，华大没有人群词。</div>
+    <div class="insight good"><div class="t">华大的差异化抓手</div>"科研级益生菌、精准营养、一人一方、AI 配方"是华大独有的专业心智词，竞品没有。建议双十一内容在此基础上补齐三类词：<b>主推品系列词</b>（益休、镜脂轻）、<b>人群词</b>（50+ / 中老年）、<b>场景词</b>（睡眠、体重管理），并配合搜一搜把品牌搜索从 0 做起来。</div>
+
+    <div style="font-weight:700;font-size:14px;margin:22px 0 8px">如翼原始截图</div>
+    <div class="grid2">
+      <div><a href="assets/m3-huada-overview.png" target="_blank"><img class="shot" style="background:#fff" src="assets/m3-huada-overview.png" alt="华大营养品牌传播概览"></a><div class="shot-cap">华大营养 · 品牌传播概览</div></div>
+      <div><a href="assets/m3-wyl-overview.png" target="_blank"><img class="shot" style="background:#fff" src="assets/m3-wyl-overview.png" alt="万益蓝品牌传播概览"></a><div class="shot-cap">万益蓝 · 品牌传播概览</div></div>
+      <div><a href="assets/m3-huada-keywords.png" target="_blank"><img class="shot" style="background:#fff" src="assets/m3-huada-keywords.png" alt="华大营养品牌关键词"></a><div class="shot-cap">华大营养 · 品牌关键词</div></div>
+      <div><a href="assets/m3-wyl-keywords.png" target="_blank"><img class="shot" style="background:#fff" src="assets/m3-wyl-keywords.png" alt="万益蓝品牌关键词"></a><div class="shot-cap">万益蓝 · 品牌关键词</div></div>
+    </div>
+    <p class="note" style="margin:6px 0 0">点击截图可在新窗口查看大图</p>
+  </div>
+
+  <!-- A4 跨店攻防 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A4</span>跨店攻防：成交端能抢，种草端失血</div>
+    <p class="note">近 30 天（至 10/5）小店资产流转，3 家店合并为品牌口径</p>
+    <div class="mini-kpis">
+      <div class="mk r"><div class="mv">-7,371</div><div class="ml">品牌种草净流出（人）</div></div>
+      <div class="mk r"><div class="mv">-2.37<small>万</small></div><div class="ml">成交净流出，流出≈流入的 13.3 倍</div></div>
+      <div class="mk g"><div class="mv">45.93%</div><div class="ml">抢先成交占比（对比店铺 43.59%），承接力仍在</div></div>
+    </div>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="cCross"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cLost"></canvas></div></div>
+    </div>
+    <table style="margin-top:16px">
+      <tr><th>店铺</th><th class="num">种草流出</th><th class="num">种草流入</th><th class="num">成交流出</th><th class="num">成交流入</th><th>判断</th></tr>
+      <tr><td>华大营养益生菌-BGINutri</td><td class="num">100,496</td><td class="num">121,881</td><td class="num">17,697</td><td class="num">1,121</td><td><span class="badge b-up">种草净流入 +2.1万</span></td></tr>
+      <tr><td>华大营养益生菌</td><td class="num">79,105</td><td class="num">52,234</td><td class="num">7,741</td><td class="num">801</td><td><span class="badge b-down">双端净流出</span></td></tr>
+      <tr><td>华大营养膳食</td><td class="num">2,219</td><td class="num">334</td><td class="num">212</td><td class="num">5</td><td><span class="badge b-down">纯售卖型</span></td></tr>
+    </table>
+    <div class="insight warn" style="margin-top:14px"><div class="t">被谁、被什么截流</div>流失种草人群 <b>98% 由效果竞价触达</b>——华大买来的泛种草人群，被头部竞品"明星 × 单品"（如棕色脂肪益生菌·明星同款）和内容电商爆品在更浅的环节完成心智抢占。</div>
+  </div>
+
+  <!-- A5 类目心智 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">A5</span>类目心智：种草心智略优，成交心智掉队</div>
+    <p class="note">「保健食品/膳食营养补充食品」大类目，2026-10-05 小店资产分布</p>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="cStoreCat"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cSubCat"></canvas></div></div>
+    </div>
+    <div class="grid2" style="margin-top:20px">
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px">益生菌子类目：华大品牌共鸣人群 TGI</div>
+        <div class="contrast">
+          <div class="cb c-hi"><div class="cv">147.7</div><div class="cl">种草场景（行业最高档）</div></div>
+          <div class="vs">→</div>
+          <div class="cb c-lo"><div class="cv">45.6</div><div class="cl">成交场景（明显落后头部）</div></div>
+        </div>
+        <div class="insight" style="margin:0"><div class="t">共鸣密度高、成交心智弱</div>成交场景华大占比 0.069，落后万益蓝 0.168、诺特兰德 0.121——科研背景与专业度没有通过内容沉淀到成交层。</div>
+      </div>
+      <div>
+        <div class="insight good" style="margin-top:0"><div class="t">双十一主推排序（据 R3 心智强度）</div>
+          ① <b>睡眠（益休）R3≈49万</b>：心智最强、竞品相对薄弱 → 主推<br>
+          ② <b>体重（镜脂轻）R3≈36万</b>：契合大盘减肥瘦身品类暴涨 → 主推<br>
+          ③ 肠道（益畅）R3≈28万：竞品主战场 → 守基本盘<br>
+          ④ 骨骼（益力）R3≈6万：只做科普铺垫，不投收割</div>
+        <div class="insight warn"><div class="t">节奏含义</div>店铺 R4 仅 1.35%（类目均值 6 成）→ 大促要<b>先内容种草 2-3 周，再开效果收割</b>；膳食店 R3 仅 0.57%，不宜承担大促 KPI。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== PART B ===== -->
+  <div class="part-banner b2"><span class="pb-tag">PART B</span><span class="pb-t">三层补 R3：不只是互选</span><span class="pb-d">目标：种草率 3.82% → 6.83%</span></div>
+
+  <div class="quote">补 R3 不是只靠互选，而是三层组合拳：<b>付费种草层</b>（视频号竞价种草化 + 互选提效 + 专家达播 + 品牌竞价）、<b>人群层</b>（436 万 R2 定向种草 + 21.5 万反抢）、<b>收口层</b>（搜一搜 + 自有阵地）。</div>
+
+  <!-- 第一层 -->
+  <div class="layer l1">
+    <div class="lh"><div class="ln">1</div><div class="lt">付费种草层：让已花的钱更"种草"</div><div class="ld">解决：种草率低、内容浅</div></div>
+    <div class="lb">
+      <div class="lever">
+        <div class="lv-h"><b>① 视频号效果竞价"种草化"</b><span class="pill p-free">基本不增预算</span><span class="pill p-now">立即可做</span><span class="pill p-new">最推荐</span></div>
+        <p><span class="k">依据：</span>视频号效果竞价种草占比 51.7%、<b>TGI 200</b>，是华大效率最高的种草触点；腾讯新闻 TGI 167 可同步测试。</p>
+        <p><span class="k">动作：</span>素材从纯卖货转向科普口播 / 场景内容；切一部分预算专做种草测试，考核关注、长播完、回搜而非只看 ROI。</p>
+      </div>
+      <div class="lever">
+        <div class="lv-h"><b>② 互选：从"堆量"到"提效"</b><span class="pill p-cost">需预算</span><span class="pill p-tbd">10月中前拍板</span></div>
+        <p><span class="k">依据：</span>观看 9 月 158.8 万（+117%）拉动 R3 回升，路径已验证；但组件点击率 2.49% → 0.76% 逐月下滑、种草 TGI 仅 28。</p>
+        <p><span class="k">动作：</span>用华大 R3 人群反推达人、换内容策略；考核从播放量 → 点击率 / 回搜率 / 进店率；搭配二次推广加热。</p>
+      </div>
+      <div class="chart-box" style="height:280px;margin:6px 0 16px"><canvas id="cHx"></canvas></div>
+      <div class="embed-box">
+        <div class="embed-h">
+          <div><b>深度分析：互选达人 × 小店生意</b><span>14 位互选达人 · 店铺 5R 日度 · 达人曝光人群 × 小店成交人群交集</span></div>
+          <a class="embed-open" href="assets/kol-analysis.html" target="_blank">新窗口全屏打开 ↗</a>
+        </div>
+        <iframe class="embed-frame" src="assets/kol-analysis.html" title="互选达人 × 小店生意分析" loading="lazy"></iframe>
+      </div>
+      <div class="lever">
+        <div class="lv-h"><b>③ 达播：收口到"营养专家"人设</b><span class="pill p-free">调结构不增量</span><span class="pill p-now">立即可做</span></div>
+        <p><span class="k">依据：</span>Q3 达播 67 场、GMV 1,129.6 万 / GSV 787.5 万；营养专家张晔 2 场 GSV 209.8 万（占达播 26.6%），场均 GMV 169 万，是达播整体场均（16.9 万）的 <b>10 倍</b>。但其退款率 37.9%，高于达播平均 30.3%。</p>
+        <p><span class="k">动作：</span>预算向专家/科普人设集中，拉高场均产出；同步把退款率纳入达人考核，优化大场承接与售后。</p>
+      </div>
+      <div class="chart-box sm" style="margin:6px 0 16px"><canvas id="cDbTop"></canvas></div>
+      <div class="lever">
+        <div class="lv-h"><b>④ 品牌竞价 / 合约：大场前集中蓄水</b><span class="pill p-cost">需预算</span><span class="pill p-tbd">资源门槛待确认</span></div>
+        <p><span class="k">依据：</span>当前触点树中品牌竞价/合约占比 &lt;0.1%，品牌心智厚度完全空白。</p>
+        <p><span class="k">动作：</span>预热期打一波，配种草素材，不常态化。</p>
+      </div>
+      <div class="insight warn" style="margin:4px 0 0"><div class="t">观察</div>商品聚合页占比 3.5% → 25.7%，建议持续关注其对种草的影响。</div>
+    </div>
+  </div>
+
+  <!-- 第二层 -->
+  <div class="layer l2">
+    <div class="lh"><div class="ln">2</div><div class="lt">人群层：先深耕已拉进来的人</div><div class="ld">解决：R1/R2 淤积、被竞品截流</div></div>
+    <div class="lb">
+      <div class="lever">
+        <div class="lv-h"><b>⑤ R2 人群定向种草（最被低估的一招）</b><span class="pill p-free">基本不增预算</span><span class="pill p-now">立即可做</span></div>
+        <div class="pool">
+          <div class="pc" style="background:var(--blue-light)"><div class="pv" style="color:var(--blue-dark)">436.5万</div><div class="pl">R2 回应人群池</div></div>
+          <div class="pa">30天 →</div>
+          <div class="pc" style="background:#effaf5"><div class="pv" style="color:var(--green)">28.2万</div><div class="pl">走到 R3（仅 6.5%）</div></div>
+          <div class="pa">同期</div>
+          <div class="pc" style="background:#fff6f6"><div class="pv" style="color:var(--red)">315.7万</div><div class="pl">回落非 5R（流失）</div></div>
+        </div>
+        <p><span class="k">动作：</span>如翼导出 R2 人群包，用科普 / 专家内容定向追投——人已经认识华大，差的只是一次深度内容，比继续拉新便宜。</p>
+      </div>
+      <div class="lever">
+        <div class="lv-h"><b>⑥ 跨店反抢人群夹</b><span class="pill p-free">基本不增预算</span><span class="pill p-now">立即可做</span></div>
+        <p><span class="k">依据：</span>被抢先种草 21.5 万人 + 成交净流出 2.4 万；华大抢先成交占比 45.93% ＞ 竞品 43.59%，反抢有胜算。</p>
+        <p><span class="k">动作：</span>"被抢先种草人群包 + 流失成交人群包"定向，投益休（睡眠）/ 镜脂轻（体重）差异化内容，错位竞争、不在肠道益生菌主战场打消耗战。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第三层 -->
+  <div class="layer l3">
+    <div class="lh"><div class="ln">3</div><div class="lt">收口层：把"想要"接住</div><div class="ld">解决：品牌词搜索=0、阵地空白</div></div>
+    <div class="lb">
+      <div class="lever">
+        <div class="lv-h"><b>⑦ 搜一搜：品专 + 搜索竞价</b><span class="pill p-cost">需预算</span><span class="pill p-tbd">10月中前拍板</span></div>
+        <p><span class="k">依据：</span>品牌词搜索识别 = 0（行业第 76）；Q3 搜一搜消耗 55 万（+328%），但 ROI 偏低、计价率偏高。</p>
+        <p><span class="k">动作：</span>卡"益生菌怎么选""睡眠益生菌"等类目/场景词（词云已出现需求）。<b>按收口/回搜考核，不按 ROI</b>，否则会被一刀砍掉。</p>
+      </div>
+      <div class="lever">
+        <div class="lv-h"><b>⑧ 自有阵地：尹烨 IP + 公众号 + 视频号主页</b><span class="pill p-cost">需投入</span><span class="pill p-long">长期资产</span></div>
+        <p><span class="k">依据：</span>自然内容种草占比 0.05%；新发布内容 23 条 vs 竞品 612 条；公众号是 Q3 ROI 最高的版位，但消耗仅占 10.8%。</p>
+        <p><span class="k">动作：</span>尹烨（20-40万粉）做脑肠轴科普承接益休睡眠心智；推动 wid 授权验证内容 ROI；公众号版位扩量兼承接种草。</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 优先级矩阵 -->
+  <div class="card">
+    <h3><span class="dot"></span>双十一前优先级矩阵（剩约 4.5 周）</h3>
+    <table>
+      <tr><th>优先级</th><th>抓手</th><th>新增预算</th><th>双十一能否吃到</th></tr>
+      <tr><td><span class="badge b-up">立即执行</span></td><td>① 视频号竞价种草化 / ③ 达播收口专家 / ⑤ R2 定向 / ⑥ 反抢人群包</td><td>基本不需要</td><td>✅ 来得及</td></tr>
+      <tr><td><span class="badge b-star">需要拍板</span></td><td>② 互选提效 / ⑦ 搜一搜收口 / ④ 品牌竞价</td><td>需要</td><td>⚠️ 10 月中前定才来得及</td></tr>
+      <tr><td><span class="badge b-flat">长期讲</span></td><td>⑧ 尹烨 IP / 公众号阵地 / 代言人</td><td>需要</td><td>📈 双十一后的资产</td></tr>
+    </table>
+  </div>
+
+  <div class="three">
+    <div class="t-card"><div class="ic" style="background:#efeafe">🎯</div><h4>付费种草层</h4><p>竞价种草化 · 互选提效 · 专家达播 · 品牌竞价</p><p class="k">把已花的钱从"买量"变成"种草"</p></div>
+    <div class="t-card"><div class="ic" style="background:#e8f0fe">👥</div><h4>人群层</h4><p>436 万 R2 定向 · 21.5 万反抢</p><p class="k">先挖已拉进来的人，比拉新便宜</p></div>
+    <div class="t-card"><div class="ic" style="background:#fff4e0">🔍</div><h4>收口层</h4><p>搜一搜品专 · 尹烨 IP · 公众号阵地</p><p class="k">让种草的人搜得到、留得住</p></div>
+  </div>
+
+</div></section>
+
+<!-- 模块4 -->
+<section id="m4"><div class="wrap">
+  <div class="sec-head"><div class="sec-num">4</div><h2>Q4 建议 · 双十一 TODO</h2></div>
+  <p class="sec-desc">先用大盘人群洞察回答"种给谁、谁来种、在哪种、种什么"，再落成可执行动作 + 资源确认；核心节奏：先种草 2-3 周，再开收割</p>
+
+  <div class="part-banner"><span class="pb-tag">Q4 依据</span><span class="pb-t">大盘人群洞察：品牌共鸣 & 明星偏好</span><span class="pb-d">「保健食品/膳食营养补充食品」大类目 · 9/28 快照</span></div>
+
+  <!-- 人群画像 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">01</span>种给谁：熟龄、女性、已婚、高消费</div>
+    <div class="grid2">
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px">大类目大盘人群（种草 → 成交）</div>
+        <div class="mini-kpis" style="grid-template-columns:1fr 1fr">
+          <div class="mk"><div class="mv">61.5%<small> → 70.7%</small></div><div class="ml">50 岁及以上占比（种草 TGI 2.93）</div></div>
+          <div class="mk"><div class="mv">69.3%<small> → 71.9%</small></div><div class="ml">女性占比（种草 TGI 1.73）</div></div>
+          <div class="mk"><div class="mv">63.7%</div><div class="ml">已婚（TGI 4.01）</div></div>
+          <div class="mk"><div class="mv">26.2%</div><div class="ml">高消费（TGI 3.42）</div></div>
+        </div>
+      </div>
+      <div>
+        <div style="font-weight:700;font-size:14px;margin-bottom:8px">华大店铺 R3 画像（10/7）</div>
+        <div class="mini-kpis" style="grid-template-columns:1fr 1fr">
+          <div class="mk g"><div class="mv">70.6%</div><div class="ml">女性（TGI 162）</div></div>
+          <div class="mk g"><div class="mv">57.7%</div><div class="ml">50 岁及以上（TGI 265）</div></div>
+          <div class="mk g"><div class="mv">52.3%</div><div class="ml">高消费（TGI 265）</div></div>
+          <div class="mk"><div class="mv" style="font-size:16px">与大盘自洽</div><div class="ml">华大 R3 = 大盘核心客群的高浓度版</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="insight" style="margin-top:4px"><div class="t">含义</div>成交场景 50+ 占比比种草场景再高 9pp，<b>越接近成交越熟龄</b>——双十一素材、达人、价盘都要按熟龄女性的决策习惯设计（信任背书 &gt; 潮流感）。</div>
+  </div>
+
+  <!-- 品牌共鸣 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">02</span>品牌共鸣人群：华大"纯度最高"，但成交浓度掉一半</div>
+    <p class="note">BRAND_R3 · 大类目口径；TA 占比 = 品牌共鸣人群占类目共鸣大盘比例</p>
+    <div class="contrast">
+      <div class="cb c-hi"><div class="cv">31.6</div><div class="cl">种草 TGI（头部品牌最高）· TA 4.79%</div></div>
+      <div class="vs">→</div>
+      <div class="cb c-lo"><div class="cv">16.08</div><div class="cl">成交 TGI · TA 2.44%（仅种草的 50.9%）</div></div>
+    </div>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="cBrandR3"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cBrandTA"></canvas></div></div>
+    </div>
+    <div class="insight warn" style="margin-top:16px"><div class="t">与 A5 结论一致：共鸣密度高、成交心智弱</div>华大共鸣人群"纯度"行业第一，但量级只有诺特兰德的 17.3%（种草）/ 23.3%（成交）；诺特兰德、脉拓、EGUOO 等成交 TA 反而高于种草——<b>它们把共鸣转成了成交，华大没有</b>。Q4 要补的不只是 R3 的量，还有 R3→成交的承接。</div>
+    <p class="note" style="margin:6px 0 0">口径提示：此处为大类目口径（TGI 31.6/16.08）；A5 中 TGI 147.7/45.6 为益生菌子类目口径，两者不可直接混比，对外建议统一用大类目口径。</p>
+  </div>
+
+  <!-- 明星偏好 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">03</span>谁来种：受众偏好"熟龄国民度型"，年轻流量几乎无效</div>
+    <p class="note">STAR_PREFER · 大类目大盘，按成交 TGI 排序；TGI＞1 为偏好高于平均</p>
+    <div class="chart-box" style="height:400px"><canvas id="cStar"></canvas></div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="insight good" style="margin:0"><div class="t">高偏好特征</div>刘晓庆 4.62、金铭 3.62、李咏 3.09、莫言 3.08、韩红 2.93、孙俪 2.24、刘涛 1.71——<b>国民度 + 熟龄 + 健康/知识/公益人设</b>；且成交 TGI 普遍高于种草 TGI，越到成交越认这类人。</div>
+      <div class="insight warn" style="margin:0"><div class="t">低偏好对照</div>周杰伦 0.28、林俊杰 0.18、邓紫棋 0.23、赵露思 0.69、肖战 0.76、鹿晗 0.78——年轻流量明星在本类目<b>偏好显著低于平均</b>，投入性价比极低。</div>
+    </div>
+  </div>
+
+  <!-- 媒体位 & 内容偏好 -->
+  <div class="card">
+    <div class="sub-title"><span class="sn">04</span>在哪种、种什么：视频号 × 健康科普</div>
+    <div class="grid2">
+      <div><div class="chart-box sm"><canvas id="cMedia"></canvas></div></div>
+      <div><div class="chart-box sm"><canvas id="cInterest"></canvas></div></div>
+    </div>
+    <div class="insight good" style="margin-top:16px"><div class="t">与"三层补 R3"完全吻合</div>华大 R3 人群媒体位 TGI：<b>视频号 257 / 公众号 228 / 搜一搜 225</b> ——分别对应付费种草层（视频号竞价种草化）、收口层（公众号阵地 + 搜一搜）。内容偏好健康 687、历史 662、科学科普 518、教育 400，与华大"科研级益生菌 / 精准营养"天然契合。</div>
+    <p class="note" style="margin:6px 0 0">注：大盘媒体位 TGI（视频号 2.4、腾讯新闻 2.73、小程序 2.01、搜一搜 1.94、公众号 1.74）与店铺 R3 画像 TGI 为不同量纲，未合并作图。</p>
+  </div>
+
+  <!-- Q4 建议 -->
+  <div class="card" style="border:2px solid var(--blue)">
+    <h3><span class="dot"></span>Q4 建议：四个"按人群设计"的决策</h3>
+    <table>
+      <tr><th style="width:110px">决策</th><th>建议</th><th>落到哪一层</th></tr>
+      <tr><td><b>谁来种</b></td><td>达人/明星按"<b>国民度 × 健康/知识人设</b>"选：孙俪型、养生专家、三甲医生/营养师科普型；<b>放弃年轻流量向</b>。与达播"营养专家张晔场均产出为平均 10 倍"的结论互相印证</td><td><span class="badge b-flat">付费种草层 ②③</span></td></tr>
+      <tr><td><b>种给谁</b></td><td>以「大类目品牌共鸣人群（BRAND_R3）」作为双十一种草定向基准，叠加 R2 人群包 + 流失种草人群包做反抢</td><td><span class="badge b-flat">人群层 ⑤⑥</span></td></tr>
+      <tr><td><b>在哪种</b></td><td>视频号为主场（TGI 257），公众号（228）+ 搜一搜（225）做承接与收口</td><td><span class="badge b-flat">付费种草层 ① · 收口层 ⑦⑧</span></td></tr>
+      <tr><td><b>种什么</b></td><td>内容主线 = "<b>科研级益生菌 / 精准营养 × 健康科普</b>"；场景落到睡眠（益休）/ 体重（镜脂轻），尹烨 IP 是天然载体</td><td><span class="badge b-flat">全层通用</span></td></tr>
+    </table>
+  </div>
+
+  <!-- 双十一政策 -->
+  <div class="part-banner" style="background:linear-gradient(90deg,#d9480f,#f76707)"><span class="pb-tag">11.11 政策</span><span class="pb-t">微信小店 11.11 平台大促报名已开放</span><span class="pb-d">跨店满减补贴 · 电商成长卡 · 主播专属券</span></div>
+
+  <div class="card">
+    <div class="quote" style="margin-top:0;background:linear-gradient(90deg,#fff1e6,transparent);border-left-color:#f76707;color:#9a3412">📢 报名可享<b>跨店满减平台补贴、电商成长卡、主播专属券</b>等权益，建议尽快报名，抢占增长先机！</div>
+    <div class="policy-wrap">
+      <div class="policy-main">
+        <div class="pol">
+          <div class="pol-h"><span class="pol-n">玩法一</span><b>11.11 跨店满减补贴</b></div>
+          <p><span class="k">报名路径：</span>微信小店后台 → 营销中心 → 平台活动 → 11.11 跨店满减补贴（原金秋大促满减补贴升级）</p>
+          <p><span class="k">电脑端报名：</span><a href="https://store.weixin.qq.com/shop/marketingkol/activity/home" target="_blank">store.weixin.qq.com/shop/marketingkol/activity/home</a></p>
+          <p><span class="k">报名须知：</span>金秋大促期间保持<b>【续报双十一】开关开启</b>的商家，报名金秋大促的商品若满足 11.11 报名条件将<b>自动续报</b>，无需重新提报；不满足 11.11 条件的商品将陆续清退报名。</p>
+          <div class="pol-warn">❗ 11.11 满减券面额有变化，参与续报的商家需进入活动商品提报页，<b>查看商品新的预期到手价格以及出资金额</b>，避免活动期间券后价格不符合预期！</div>
+        </div>
+        <div class="pol">
+          <div class="pol-h"><span class="pol-n">玩法二 & 三</span><b>直播大场激励 & 主播专属券</b></div>
+          <p><span class="k">活动说明：</span>报名【11.11 直播大场及跃迁激励】活动的商家/带货者，可获<b>电商成长卡激励 + 主播专属券</b>双重权益。</p>
+          <p><span class="k">商家报名：</span>微信小店后台 → 营销中心 → 平台活动 → 11.11 直播大场及跃迁激励<br>
+            <a href="https://store.weixin.qq.com/shop/marketingkol/activity/detail?id=1364&curTab=2" target="_blank">store.weixin.qq.com/shop/marketingkol/activity/detail?id=1364&amp;curTab=2</a></p>
+          <p><span class="k">带货者报名：</span>微信小店带货助手 → 营销 → 平台活动 → 11.11 直播大场及跃迁激励<br>
+            <a href="https://store.weixin.qq.com/talent/shop/marketingkol/activity/detail?id=1364&curTab=2" target="_blank">store.weixin.qq.com/talent/shop/marketingkol/activity/detail?id=1364&amp;curTab=2</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div></section>
+
+<footer>华大营养 2026 Q3 复盘 + 双十一策略报告 2026.10.09</footer>
+
+<script>
+Chart.defaults.font.family="-apple-system,'PingFang SC','Microsoft YaHei',sans-serif";
+Chart.defaults.font.size=13;
+Chart.defaults.color="#5a6578";
+const BLUE="#1a5ed6",BLUED="#0d3a8a",GREEN="#17a673",RED="#e5484d",AMBER="#f59e0b",PURPLE="#7c5cff",GRAY="#c3cbd9";
+const fmtWan=v=>v+"万";
+
+// 品类 GMV 饼图
+new Chart(cPie,{type:"doughnut",data:{
+  labels:["镜脂","益畅","益休","直购","益力"],
+  datasets:[{data:[1935.85,1858.64,975.01,680.35,92.61],
+    backgroundColor:[BLUE,GREEN,PURPLE,AMBER,GRAY],borderWidth:2,borderColor:"#fff"}]},
+  options:{plugins:{legend:{position:"right"},tooltip:{callbacks:{label:c=>c.label+" "+c.parsed+"万 ("+(c.parsed/5542.46*100).toFixed(1)+"%)"}}},cutout:"58%"}});
+
+// Q2 vs Q3 链路 GSV 堆叠
+new Chart(cQoQ,{type:"bar",data:{
+  labels:["Q2","Q3"],
+  datasets:[
+    {label:"直播店",data:[6412.5,4860.8],backgroundColor:BLUE,borderRadius:4},
+    {label:"直购",data:[718.4,646.7],backgroundColor:AMBER,borderRadius:4},
+    {label:"达播",data:[0,787.5],backgroundColor:GREEN,borderRadius:4}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"GSV 7,131万 → 6,295万（-11.7%），达播新增 787.5万"},
+    tooltip:{callbacks:{label:c=>c.dataset.label+" "+c.parsed.y+"万"}}},
+    scales:{x:{stacked:true},y:{stacked:true,title:{display:true,text:"GSV(万)"}}}}});
+
+// 品类 ROI
+new Chart(cRoi,{type:"bar",data:{
+  labels:["vs 益力","vs 益休","vs 镜脂","vs 直购"],
+  datasets:[{label:"益畅 ROI 高出 %",data:[36.0,46.0,47.8,55.6],
+    backgroundColor:[GREEN,GREEN,GREEN,GREEN],borderRadius:6}]},
+  options:{plugins:{legend:{display:false},title:{display:true,text:"益畅（肠道）ROI 高出其他品类的幅度"},
+    tooltip:{callbacks:{label:c=>"益畅 ROI 高出 "+c.parsed.y+"%"}}},
+    scales:{y:{beginAtZero:true,title:{display:true,text:"高出幅度 %"},ticks:{callback:v=>v+"%"}}}}});
+
+// 骨骼益生菌 开播日趋势
+new Chart(cBone,{data:{
+  labels:["9/19","9/20","9/21","9/22","9/23","9/24","9/25","9/26","9/27","9/28","9/29","9/30","10/1","10/2","10/3","10/4","10/5","10/6","10/7"],
+  datasets:[
+    {type:"bar",label:"有效成交(万)",data:[0.10,0,0,1.27,5.08,18.75,8.93,2.75,17.04,10.67,14.01,13.32,16.63,9.02,17.35,9.55,10.37,13.51,10.07],
+      backgroundColor:(ctx)=>ctx.dataIndex===5?GREEN:"rgba(23,166,115,.45)",borderRadius:4,yAxisID:"y"},
+    {type:"line",label:"消耗(万)",data:[0.01,0.04,0.07,0.92,3.31,9.67,4.75,1.73,9.92,6.29,8.01,7.98,10.21,5.89,10.06,5.43,6.50,7.58,5.95],
+      borderColor:BLUE,backgroundColor:BLUE,borderWidth:2,tension:.3,pointRadius:3,yAxisID:"y"}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"9/19 开播 → 9/24（第 6 天）单日成交 18.75 万，起量后成交稳定"}},
+    scales:{y:{position:"left",beginAtZero:true,title:{display:true,text:"万元"}}}}});
+
+// 内容力下钻：华大为万益蓝的 %
+new Chart(cWylCmp,{type:"bar",data:{
+  labels:["点击数","互动数","触达数","新发布内容","品牌搜索"],
+  datasets:[
+    {label:"华大为万益蓝的 %",data:[89.3,76.9,32.2,16.4,0],backgroundColor:[GREEN,"#7fcfae",AMBER,RED,RED],borderRadius:5},
+    {label:"万益蓝=100%",data:[100,100,100,100,100],type:"line",borderColor:GRAY,borderDash:[5,4],pointRadius:0,borderWidth:2}
+  ]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},title:{display:true,text:"华大为万益蓝的 %：点击、互动接近，内容量与搜索差距最大"},
+    tooltip:{callbacks:{label:c=>c.datasetIndex===0?"华大为万益蓝的 "+c.parsed.x+"%":"万益蓝 = 100%"}}},
+    scales:{x:{max:110,title:{display:true,text:"%"}}}}});
+
+// 达播分品类 GMV
+new Chart(cDbCat,{type:"doughnut",data:{
+  labels:["护理肠道","护理胃","减脂","改善睡眠","益生元","护肝","维生素","口腔益生菌","女性私处护理","增强免疫力","清风（降酸）"],
+  datasets:[{data:[399.4,192.4,184.2,120.3,81.3,42.0,40.8,32.4,19.5,12.5,5.0],
+    backgroundColor:[BLUE,"#45b3e0",GREEN,PURPLE,AMBER,"#e07aa0","#9db8ea","#7fcfae","#f3b3c5","#c7b8ff",GRAY],borderWidth:2,borderColor:"#fff"}]},
+  options:{plugins:{legend:{position:"bottom",labels:{boxWidth:10,font:{size:11}}},
+    tooltip:{callbacks:{label:c=>c.label+" "+c.parsed+"万（"+(c.parsed/1129.6*100).toFixed(1)+"%）"}}},cutout:"55%"}});
+
+// 达播月度趋势
+new Chart(cDbTrend,{data:{
+  labels:["7月","8月","9月"],
+  datasets:[
+    {type:"bar",label:"达播GMV(万)",data:[141.9,379.8,607.9],backgroundColor:BLUE,borderRadius:6,yAxisID:"y"},
+    {type:"line",label:"场均GMV(万)",data:[10.9,12.7,25.3],borderColor:AMBER,backgroundColor:AMBER,borderWidth:3,tension:.3,pointRadius:5,yAxisID:"y1"}
+  ]},
+  options:{plugins:{legend:{position:"top"}},scales:{
+    y:{position:"left",title:{display:true,text:"GMV(万)"}},
+    y1:{position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"场均(万)"}}}}});
+
+// 5R 结构
+new Chart(c5r,{type:"bar",data:{
+  labels:["R1触达","R2回应","R3共鸣","R4行动","R5信赖"],
+  datasets:[
+    {label:"华大",data:[49.56,38.55,10.18,1.19,0.52],backgroundColor:BLUE,borderRadius:4},
+    {label:"竞品均值",data:[37.96,42.67,17.42,1.48,0.47],backgroundColor:GRAY,borderRadius:4}
+  ]},
+  options:{plugins:{legend:{position:"top"}},scales:{y:{title:{display:true,text:"占比 %"}}}}});
+
+// 种草率
+new Chart(cSeed,{type:"bar",data:{
+  labels:["华大","行业均值","行业TOP5","竞品均值"],
+  datasets:[{data:[3.82,6.83,8.61,17.78],
+    backgroundColor:[RED,GRAY,GRAY,GREEN],borderRadius:6}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+"%"}}},scales:{x:{title:{display:true,text:"种草率(非5R→R3) %"}}}}});
+
+// 互选 双轴
+new Chart(cHx,{data:{
+  labels:["7月","8月","9月"],
+  datasets:[
+    {type:"bar",label:"互选观看(万次)",data:[3.0,73.2,158.8],backgroundColor:PURPLE,borderRadius:6,yAxisID:"y"},
+    {type:"line",label:"组件点击率 %",data:[2.49,0.90,0.76],borderColor:RED,backgroundColor:RED,borderWidth:3,tension:.3,pointRadius:5,yAxisID:"y1"}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"量暴涨 (+117%) 但点击率逐月下滑 → 要提效不是加量"}},
+    scales:{y:{position:"left",title:{display:true,text:"观看(万次)"}},
+    y1:{position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"点击率 %"},suggestedMax:3}}}});
+
+// 达播 TOP 达人（退后GSV）
+new Chart(cDbTop,{type:"bar",data:{
+  labels:["营养专家张晔","艺芯爱运动","行远舞蹈","我是甄老板","靠谱形体","瑜伽邓邓"],
+  datasets:[{label:"退后GMV(万)",data:[209.8,124.1,67.1,43.2,39.6,32.9],
+    backgroundColor:[GREEN,PURPLE,GRAY,GRAY,GRAY,GRAY],borderRadius:5}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},title:{display:true,text:"营养专家张晔 2 场贡献达播 GSV 26.6%"}},scales:{x:{title:{display:true,text:"GSV(万)"}}}}});
+
+// 触点种草贡献 + TGI
+new Chart(cTouch,{data:{
+  labels:["效果竞价(合计)","└视频号竞价","└公众号小程序","└腾讯新闻","互选(含二推)","搜索投放","品牌阵地"],
+  datasets:[
+    {type:"bar",label:"种草贡献占比 %",data:[94.15,51.7,37.3,20.7,12.76,1.11,0.32],
+      backgroundColor:[BLUE,GREEN,"#7fa6e8",GREEN,PURPLE,AMBER,GRAY],borderRadius:5,yAxisID:"y"},
+    {type:"line",label:"种草 TGI",data:[116,200,72,167,28,6,null],borderColor:RED,backgroundColor:RED,borderWidth:2,pointRadius:5,showLine:false,yAxisID:"y1"}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"视频号竞价 TGI 200 是最强种草触点；互选/搜索/阵地 TGI 远低于 100"}},
+    scales:{y:{position:"left",title:{display:true,text:"种草贡献占比 %"}},
+      y1:{position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"TGI"},suggestedMax:220}}}});
+
+// 6个月趋势：R3月占比/流入率 + 互选观看
+new Chart(cTrend6,{data:{
+  labels:["4月","5月","6月(618)","7月","8月","9月"],
+  datasets:[
+    {type:"bar",label:"互选观看(万次)",data:[0.36,0,0,3.0,73.2,158.8],backgroundColor:"rgba(124,92,255,.35)",borderRadius:5,yAxisID:"y1"},
+    {type:"line",label:"R3 月占比 %",data:[14.19,11.20,9.77,9.71,8.93,9.34],borderColor:BLUE,backgroundColor:BLUE,borderWidth:3,tension:.3,pointRadius:4,yAxisID:"y"},
+    {type:"line",label:"R3 流入率 %",data:[6.67,4.46,5.12,3.84,5.20,4.69],borderColor:RED,backgroundColor:RED,borderWidth:2,borderDash:[5,4],tension:.3,pointRadius:4,yAxisID:"y"}
+  ]},
+  options:{plugins:{legend:{position:"top",labels:{boxWidth:12,font:{size:11}}},title:{display:true,text:"近6个月：R3 下滑后靠互选放量回升"}},
+    scales:{y:{position:"left",beginAtZero:true,title:{display:true,text:"%"}},
+      y1:{position:"right",grid:{drawOnChartArea:false},title:{display:true,text:"互选观看(万)"}}}}});
+
+// 30天关键流：流入 vs 回落
+new Chart(cFlow,{type:"bar",data:{
+  labels:["非5R→R1","非5R→R2","非5R→R3","R2→R3","R1→非5R","R2→非5R"],
+  datasets:[{label:"人数(万)",data:[433.7,249.4,42.8,28.2,777.7,315.7],
+    backgroundColor:[BLUE,BLUE,GREEN,GREEN,RED,RED],borderRadius:5}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},title:{display:true,text:"30天关键流：流向R3仅71万，回落非5R达1,093万"},
+    tooltip:{callbacks:{label:c=>c.parsed.x+"万人"}}},scales:{x:{title:{display:true,text:"万人"}}}}});
+
+// 内容资产 vs 竞品均值
+new Chart(cContent,{type:"bar",data:{
+  labels:["新发布内容","触达","点击","互动"],
+  datasets:[
+    {label:"华大为竞品均值的 %",data:[3.8,18.3,29.7,42.7],backgroundColor:[RED,RED,AMBER,AMBER],borderRadius:5},
+    {label:"竞品均值=100%",data:[100,100,100,100],type:"line",borderColor:GRAY,borderDash:[5,4],pointRadius:0,borderWidth:2}
+  ]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>c.parsed.x+"%"}}},
+    scales:{x:{max:110,title:{display:true,text:"为竞品均值的 %"}}}}});
+
+// 流失去向商品（脱敏强度指数）
+new Chart(cLost,{type:"bar",data:{
+  labels:["棕色脂肪益生菌·明星同款","棕色脂肪益生菌·明星推荐款","纳豆红曲胶囊","蛋白粉","钙铁锌口服液","四维益生菌"],
+  datasets:[{label:"流失强度指数",data:[14251,10836,5869,4674,4160,3898],
+    backgroundColor:[RED,RED,GRAY,GRAY,GRAY,AMBER],borderRadius:5}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},title:{display:true,text:"被什么商品抢走：明星×单品是最大截流器"},
+    tooltip:{callbacks:{label:c=>"强度指数 "+c.parsed.x+"（脱敏，非真实人数）"}}},
+    scales:{x:{title:{display:true,text:"脱敏强度指数"}},y:{ticks:{font:{size:11}}}}}});
+
+// 店铺 R3/R4 vs 类目
+new Chart(cStoreCat,{type:"bar",data:{
+  labels:["类目均值","类目TOP5","BGINutri店","华大益生菌店","华大膳食店"],
+  datasets:[
+    {label:"R3 占比 %",data:[7.61,9.23,10.01,9.27,0.57],backgroundColor:[GRAY,GRAY,BLUE,BLUE,RED],borderRadius:5},
+    {label:"R4 占比 %",data:[2.16,4.15,1.35,1.53,0.03],backgroundColor:[ "#e3e7ee","#e3e7ee",AMBER,AMBER,"#f6c3c4"],borderRadius:5}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"R3 超类目TOP5，R4 仅类目均值6成"}},scales:{y:{title:{display:true,text:"%"}}}}});
+
+// 子类目 R3 心智
+new Chart(cSubCat,{type:"bar",data:{
+  labels:["睡眠(益休)","体重(镜脂轻)","肠道(益畅)","骨骼(益力)"],
+  datasets:[{label:"店内R3人数(万)",data:[49.0,36.0,27.7,6.1],backgroundColor:[GREEN,GREEN,BLUE,GRAY],borderRadius:6}]},
+  options:{plugins:{legend:{display:false},title:{display:true,text:"子类目 R3 心智强度：睡眠 > 体重 > 肠道 > 骨骼"}},
+    scales:{y:{title:{display:true,text:"R3 人数(万)"}}}}});
+
+// Q4：品牌共鸣 TGI 种草 vs 成交
+const brands=["华大营养","哈药","多燕瘦","脉拓","诺特兰德","EGUOO","万益蓝","赛乐赛","硅基动感","Yep"];
+new Chart(cBrandR3,{type:"bar",data:{labels:brands,
+  datasets:[
+    {label:"种草 TGI",data:[31.60,22.00,13.29,8.95,9.52,7.58,7.83,7.08,2.73,1.91],backgroundColor:brands.map(b=>b==="华大营养"?BLUE:"#9db8ea"),borderRadius:4},
+    {label:"成交 TGI",data:[16.08,11.56,14.49,13.93,3.59,9.02,7.40,9.63,2.80,1.22],backgroundColor:brands.map(b=>b==="华大营养"?AMBER:"#f3d9a6"),borderRadius:4}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"共鸣人群纯度(TGI)：华大种草最高，成交腰斩"}},
+    scales:{x:{ticks:{font:{size:11},maxRotation:45,minRotation:45}},y:{title:{display:true,text:"TGI"}}}}});
+
+// Q4：品牌共鸣 TA 量级
+const brandsTA=["诺特兰德","硅基动感","Yep","万益蓝","华大营养","哈药","EGUOO","脉拓"];
+new Chart(cBrandTA,{type:"bar",data:{labels:brandsTA,
+  datasets:[
+    {label:"种草 TA %",data:[27.64,20.70,8.39,4.92,4.79,3.81,1.99,1.84],backgroundColor:brandsTA.map(b=>b==="华大营养"?BLUE:"#9db8ea"),borderRadius:4},
+    {label:"成交 TA %",data:[10.44,21.17,5.36,4.65,2.44,2.00,2.36,2.87],backgroundColor:brandsTA.map(b=>b==="华大营养"?AMBER:"#f3d9a6"),borderRadius:4}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"共鸣人群量级(TA占比)：华大仍是腰部"}},
+    scales:{x:{ticks:{font:{size:11},maxRotation:45,minRotation:45}},y:{title:{display:true,text:"TA 占比 %"}}}}});
+
+// Q4：明星偏好（成交TGI）
+const stars=["刘晓庆","金铭","李咏","莫言","马云","韩红","赵本山","孙俪","章子怡","王菲","刘涛","杨幂","鹿晗","肖战","赵露思","周杰伦","邓紫棋","林俊杰"];
+const starTGI=[4.62,3.62,3.09,3.08,3.05,2.93,2.73,2.24,2.09,1.96,1.71,1.18,0.78,0.76,0.69,0.28,0.23,0.18];
+new Chart(cStar,{type:"bar",data:{labels:stars,
+  datasets:[{label:"成交 TGI",data:starTGI,backgroundColor:starTGI.map(v=>v>=1.5?GREEN:(v>=1?GRAY:RED)),borderRadius:4}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},title:{display:true,text:"绿色=熟龄国民度型（高偏好）  红色=年轻流量型（低于平均）"},
+    tooltip:{callbacks:{label:c=>"成交 TGI "+c.parsed.x}}},
+    scales:{x:{title:{display:true,text:"成交 TGI（1=平均）"}},y:{ticks:{font:{size:12}}}}}});
+
+// Q4：华大R3 媒体位 TGI
+new Chart(cMedia,{type:"bar",data:{labels:["视频号","公众号","搜一搜","小程序"],
+  datasets:[{label:"TGI",data:[257,228,225,177],backgroundColor:[BLUE,"#4a86e8",AMBER,GRAY],borderRadius:6}]},
+  options:{plugins:{legend:{display:false},title:{display:true,text:"华大 R3 人群·媒体位偏好 TGI"}},scales:{y:{beginAtZero:true,title:{display:true,text:"TGI"}}}}});
+
+// Q4：华大R3 视频号内容偏好 TGI
+new Chart(cInterest,{type:"bar",data:{labels:["健康","历史","科学科普","教育"],
+  datasets:[{label:"TGI",data:[687,662,518,400],backgroundColor:[GREEN,"#7fcfae",GREEN,"#7fcfae"],borderRadius:6}]},
+  options:{plugins:{legend:{display:false},title:{display:true,text:"华大 R3 人群·视频号内容偏好 TGI"}},scales:{y:{beginAtZero:true,title:{display:true,text:"TGI"}}}}});
+
+// 跨店攻防
+new Chart(cCross,{type:"bar",data:{
+  labels:["种草（R1/R2）","成交（R4/R5）"],
+  datasets:[
+    {label:"被竞品抢先(人)",data:[214572,16309],backgroundColor:RED,borderRadius:6},
+    {label:"华大抢回(人)",data:[147479,6871],backgroundColor:GREEN,borderRadius:6}
+  ]},
+  options:{plugins:{legend:{position:"top"},title:{display:true,text:"成交端承接力尚可，种草端失血严重"}},scales:{y:{title:{display:true,text:"人数"}}}}});
+
+// 行业品类占比
+new Chart(cIndPie,{type:"doughnut",data:{
+  labels:["菌/菇/酵素","冲饮品/食补粉","维生素/钙铁锌硒","蛋白粉/胶原蛋白","增强体质","海洋生物类","其他品类"],
+  datasets:[{data:[26.6,19.6,15.7,13.6,4.3,3.3,16.9],
+    backgroundColor:[BLUE,PURPLE,AMBER,GREEN,"#45b3e0","#e07aa0",GRAY],borderWidth:2,borderColor:"#fff"}]},
+  options:{plugins:{legend:{position:"right",labels:{boxWidth:12,font:{size:11}}},tooltip:{callbacks:{label:c=>c.label+" "+c.parsed+"%"}}},cutout:"55%"}});
+
+// 行业Top品类月度趋势
+new Chart(cIndTrend,{type:"line",data:{
+  labels:["7月","8月","9月"],
+  datasets:[
+    {label:"菌/菇/酵素",data:[1005.8,1479.1,2045.0],borderColor:BLUE,backgroundColor:BLUE,borderWidth:3,tension:.3,pointRadius:4},
+    {label:"冲饮品/食补粉",data:[1569.1,1185.3,580.6],borderColor:RED,backgroundColor:RED,borderWidth:3,tension:.3,pointRadius:4},
+    {label:"蛋白粉/胶原蛋白",data:[582.8,861.8,873.6],borderColor:GREEN,backgroundColor:GREEN,borderWidth:3,tension:.3,pointRadius:4}
+  ]},
+  options:{plugins:{legend:{position:"top",labels:{boxWidth:12,font:{size:11}}},tooltip:{enabled:false}},scales:{y:{title:{display:false},ticks:{display:false}}}}});
+
+// 益生菌竞争格局
+new Chart(cProbio,{type:"bar",data:{
+  labels:["华大营养","万益蓝","诺特兰德","呜咔实验室★新","汤臣倍健","江中益生菌","旺来益生菌★新","每日博士★新"],
+  datasets:[{label:"Q3消耗(万)",data:[2193.8,1160.9,507.0,388.8,97.8,64.2,62.4,31.5],
+    backgroundColor:[BLUE,GRAY,GRAY,RED,GRAY,GRAY,RED,RED],borderRadius:5}]},
+  options:{indexAxis:"y",plugins:{legend:{display:false},
+    title:{display:true,text:"华大第一(份额47.6%)，11家新玩家涌入(红色)"},
+    tooltip:{callbacks:{label:c=>c.label.includes("★新")?"Q3新进入":"存量玩家"}}},
+    scales:{x:{title:{display:true,text:"Q3消耗(万)"},ticks:{display:false}}}}});
+</script>
+</body>
+</html>
